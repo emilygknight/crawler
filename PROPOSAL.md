@@ -47,10 +47,15 @@ THEN I can press a button to spin the wheel based on my preferences
 
 <image link>
 
+![Build a Bar Crawl](https://docs.google.com/presentation/d/1o1uacmt8XX6MRjwRcizegEkjGPAL__D5V8UBYXGVvac/edit?usp=sharing)
+
 # APIS to be used
 
 https://docs.developer.yelp.com/reference/v3_business_search
 
+
+## Resources to use
+
 https://docs.developer.yelp.com/docs/resources-categories
 
-
+TailWind CSS Framework
