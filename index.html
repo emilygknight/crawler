@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.4/dist/full.css" rel="stylesheet" type="text/css" />
+    <title>Bar Crawler</title>
+</head>
+
+<body>
+
+    <!-- Title Header -->
+    <header class="bg-gradient-to-r from-secondary to-primary m-1 rounded-lg w-[100%-5px]">
+        <!-- style="background-image: url(https://daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg);" -->
+        <div class="hero-overlay rounded-lg"></div>
+        <div class="text-right text-neutral-content p-5 w-4/5">
+            <h1 class="mb-1 text-5xl font-bold">Bar Crawler</h1>
+        </div>
+    </header>
+
+    <!-- row -->
+    <main class="flex m-1 gap-1">
+
+        <!-- column 1 aside -->
+        <aside class="flex-col w-1/4 max-w-[25%]">
+
+            <!-- map -->
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d304.52107673255756!2d-97.74119202402814!3d30.286582339128955!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8644b577df4246bd%3A0xb7177c1de304f7f6!2sTexas%20Union!5e0!3m2!1sen!2ssg!4v1694692207215!5m2!1sen!2ssg"
+                class="w-full" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+            <!-- search section for cities -->
+            <section class="form-control w-full">
+                <label class="label">
+                    <span class="label-text w-full max-w-xs text-2xl">Search for a City</span>
+                </label>
+                <input type="text" placeholder="Type here" class="input input-bordered w-full input-primary" />
+            </section>
+
+            <ul class="menu bg-base-200 w-56 rounded-box w-full text-2xl">
+                <li class="menu-title"> Select a City</li>
+                <li><a>Item 1</a></li>
+                <li><a>Item 2</a></li>
+                <li><a>Item 3</a></li>
+            </ul>
+        </aside>
+
+        <!-- column 2 - forecast results column-->
+        <div class="flex-col w-3/4">
+            <div class="hero w-full rounded-lg">
+                <!-- style="background-image: url(https://daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg);" -->
+                <div class="hero-overlay bg-opacity-90"></div>
+                <div class="text-neutral-content w-full p-5">
+                    <div class="text-left">
+                        <h1 class="mb-5 text-4xl font-bold">Bar results</h1>
+                        <p class="mb-5">This is the 5-day bar forecast for <span id="selectedcity">City</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5 cards showing future bar predictions -->
+            <div class="flex w-full gap-1 my-1">
+
+                <!-- bar card days -->
+                <div class="card bg-base-100 shadow-xl image-full">
+                    <figure><img src="https://placekitten.com/300/200" alt="Shoes" /></figure>
+                    <div class="card-body">
+                        <h2 class="card-title">14 Sep 2023</h2>
+                        <p><span id="fcast-weathericon">☀️</span><br>
+                            Temp: <span id="fcast-temp">65</span>°<span id="fcast-tempmetrics">F</span><br>
+                            Wind: <span id="fcast-wind"></span>20mph<br>
+                            Humidity: <span id="fcast_humidity">65%</span>
+                        </p>
+                        <div class="card-actions justify-end">
+                            <button class="btn btn-primary">Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- bar card days -->
+                <div class="card bg-base-100 shadow-xl image-full">
+                    <figure><img src="https://placekitten.com/300/200" alt="Shoes" /></figure>
+                    <div class="card-body">
+                        <h2 class="card-title">14 Sep 2023</h2>
+                        <p><span id="fcast-weathericon">☀️</span><br>
+                            Temp: <span id="fcast-temp">65</span>°<span id="fcast-tempmetrics">F</span><br>
+                            Wind: <span id="fcast-wind"></span>20mph<br>
+                            Humidity: <span id="fcast_humidity">65%</span>
+                        </p>
+                        <div class="card-actions justify-end">
+                            <button class="btn btn-primary">Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- bar card days -->
+                <div class="card bg-base-100 shadow-xl image-full">
+                    <figure><img src="https://placekitten.com/300/200" alt="Shoes" /></figure>
+                    <div class="card-body">
+                        <h2 class="card-title">14 Sep 2023</h2>
+                        <p><span id="fcast-weathericon">☀️</span><br>
+                            Temp: <span id="fcast-temp">65</span>°<span id="fcast-tempmetrics">F</span><br>
+                            Wind: <span id="fcast-wind"></span>20mph<br>
+                            Humidity: <span id="fcast_humidity">65%</span>
+                        </p>
+                        <div class="card-actions justify-end">
+                            <button class="btn btn-primary">Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- bar card days -->
+                <div class="card bg-base-100 shadow-xl image-full">
+                    <figure><img src="https://placekitten.com/300/200" alt="Shoes" /></figure>
+                    <div class="card-body">
+                        <h2 class="card-title">14 Sep 2023</h2>
+                        <p><span id="fcast-weathericon">☀️</span><br>
+                            Temp: <span id="fcast-temp">65</span>°<span id="fcast-tempmetrics">F</span><br>
+                            Wind: <span id="fcast-wind"></span>20mph<br>
+                            Humidity: <span id="fcast_humidity">65%</span>
+                        </p>
+                        <div class="card-actions justify-end">
+                            <button class="btn btn-primary">Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- bar card days -->
+                <div class="card bg-base-100 shadow-xl image-full">
+                    <figure><img src="https://placekitten.com/300/200" alt="Shoes" /></figure>
+                    <div class="card-body">
+                        <h2 class="card-title">14 Sep 2023</h2>
+                        <p><span id="fcast-weathericon">☀️</span><br>
+                            Temp: <span id="fcast-temp">65</span>°<span id="fcast-tempmetrics">F</span><br>
+                            Wind: <span id="fcast-wind"></span>20mph<br>
+                            Humidity: <span id="fcast_humidity">65%</span>
+                        </p>
+                        <div class="card-actions justify-end">
+                            <button class="btn btn-primary">Details</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+    <button id="find-me" class="btn btn-primary">Find Me</button>
+    <p id="status"></p>
+    <a id="map-link" target="_blank"></a>
+</body>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="./assets/script.js"></script>
+
+</html>
