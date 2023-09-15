@@ -13,8 +13,7 @@ Build a Bar Crawl
 
 # Project description
 
-Imagine it's the weekend and you have no idea what you want to do...
-
+>Imagine that you want to have a great weekend but have no idea where to go. You may be from out of town and unfamiliar with the nightlife or want to try something new. Let Bar Crawl take you night out to a new level of fun. We are introducing "The Wheel." It will provide you with the top bars in you area to guarantee an amazing night, that you will hopefully forget. This incredible app will allow you to choose your own preference depending on your mood. Ready for a great night out? Try out Bar Crawl, and let the night really begin!
 
 # User stories
 
@@ -58,3 +57,18 @@ THEN I can press a button to spin the wheel based on my preferences
 [Categories in Yelp's API: https://docs.developer.yelp.com/docs/resources-categories](https://docs.developer.yelp.com/docs/resources-categories)
 
 [TailWind CSS Framework: https://tailwindcss.com/](https://tailwindcss.com/)
+
+
+# Work breakdown
+
+## Minimum Viable Project (MVP)
+1. Make each of the above an issue
+2. index.html - use Tailwind to layout the divs
+3. get user's location, embed a map
+4. integrate spinner as a focal point
+5. search location via an API for "dive bars"
+6. add a section to display the results
+7. add the pitch to the project for presentation
+
+## Request for Enhancement 
+1. dropdown bar - categorize different bars/nightlife spots based on preferences / categories (edited) 
