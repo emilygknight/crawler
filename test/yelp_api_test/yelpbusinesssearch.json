@@ -1,0 +1,833 @@
+var yelp_b_searchexample = `
+{
+   "businesses" : [
+      {
+         "alias" : "the-roosevelt-room-austin",
+         "categories" : [
+            {
+               "alias" : "cocktailbars",
+               "title" : "Cocktail Bars"
+            },
+            {
+               "alias" : "venues",
+               "title" : "Venues & Event Spaces"
+            }
+         ],
+         "coordinates" : {
+            "latitude" : 30.2677,
+            "longitude" : -97.74627
+         },
+         "display_phone" : "(512) 494-4094",
+         "distance" : 2132.40966888592,
+         "id" : "vJvUga5XNBqjTrEEK7kI-Q",
+         "image_url" : "https://s3-media1.fl.yelpcdn.com/bphoto/_DISOjs6Rg_4_Hd_CWu-Wg/o.jpg",
+         "is_closed" : false,
+         "location" : {
+            "address1" : "307 W 5th St",
+            "address2" : "Unit B",
+            "address3" : "",
+            "city" : "Austin",
+            "country" : "US",
+            "display_address" : [
+               "307 W 5th St",
+               "Unit B",
+               "Austin, TX 78701"
+            ],
+            "state" : "TX",
+            "zip_code" : "78701"
+         },
+         "name" : "The Roosevelt Room",
+         "phone" : "+15124944094",
+         "price" : "$$$",
+         "rating" : 4.5,
+         "review_count" : 735,
+         "transactions" : [],
+         "url" : "https://www.yelp.com/biz/the-roosevelt-room-austin?adjust_creative=Qep_uWAAxzkJwF7Z2AHVIA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=Qep_uWAAxzkJwF7Z2AHVIA"
+      },
+      {
+         "alias" : "here-nor-there-austin",
+         "categories" : [
+            {
+               "alias" : "cocktailbars",
+               "title" : "Cocktail Bars"
+            },
+            {
+               "alias" : "speakeasies",
+               "title" : "Speakeasies"
+            }
+         ],
+         "coordinates" : {
+            "latitude" : 30.26847,
+            "longitude" : -97.74139
+         },
+         "display_phone" : "",
+         "distance" : 1888.168038683,
+         "id" : "bFkja84hn6VVgaAVWrF4pQ",
+         "image_url" : "https://s3-media1.fl.yelpcdn.com/bphoto/yii_4KbEomgM2qmwGx0rmQ/o.jpg",
+         "is_closed" : false,
+         "location" : {
+            "address1" : "612 Brazos St",
+            "address2" : "",
+            "address3" : null,
+            "city" : "Austin",
+            "country" : "US",
+            "display_address" : [
+               "612 Brazos St",
+               "Austin, TX 78701"
+            ],
+            "state" : "TX",
+            "zip_code" : "78701"
+         },
+         "name" : "Here Nor There",
+         "phone" : "",
+         "price" : "$$$",
+         "rating" : 4.5,
+         "review_count" : 265,
+         "transactions" : [],
+         "url" : "https://www.yelp.com/biz/here-nor-there-austin?adjust_creative=Qep_uWAAxzkJwF7Z2AHVIA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=Qep_uWAAxzkJwF7Z2AHVIA"
+      },
+      {
+         "alias" : "tiki-311-austin-2",
+         "categories" : [
+            {
+               "alias" : "tikibars",
+               "title" : "Tiki Bars"
+            },
+            {
+               "alias" : "cocktailbars",
+               "title" : "Cocktail Bars"
+            }
+         ],
+         "coordinates" : {
+            "latitude" : 30.267059,
+            "longitude" : -97.740047
+         },
+         "display_phone" : "(512) 825-6868",
+         "distance" : 2018.32060673763,
+         "id" : "RxIpbcYdTyGy79hpfhPPQQ",
+         "image_url" : "https://s3-media1.fl.yelpcdn.com/bphoto/NpfWYhm7QJ7Z2kY9gX-tlw/o.jpg",
+         "is_closed" : false,
+         "location" : {
+            "address1" : "311 E 6th St",
+            "address2" : null,
+            "address3" : "",
+            "city" : "Austin",
+            "country" : "US",
+            "display_address" : [
+               "311 E 6th St",
+               "Austin, TX 78701"
+            ],
+            "state" : "TX",
+            "zip_code" : "78701"
+         },
+         "name" : "Tiki 311",
+         "phone" : "+15128256868",
+         "rating" : 5,
+         "review_count" : 8,
+         "transactions" : [],
+         "url" : "https://www.yelp.com/biz/tiki-311-austin-2?adjust_creative=Qep_uWAAxzkJwF7Z2AHVIA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=Qep_uWAAxzkJwF7Z2AHVIA"
+      },
+      {
+         "alias" : "upstairs-at-caroline-austin",
+         "categories" : [
+            {
+               "alias" : "cocktailbars",
+               "title" : "Cocktail Bars"
+            },
+            {
+               "alias" : "social_clubs",
+               "title" : "Social Clubs"
+            }
+         ],
+         "coordinates" : {
+            "latitude" : 30.26873,
+            "longitude" : -97.74217
+         },
+         "display_phone" : "(512) 982-6766",
+         "distance" : 1869.75780227751,
+         "id" : "LnBBOksOrzUiiDQkjUeMdg",
+         "image_url" : "https://s3-media4.fl.yelpcdn.com/bphoto/yxfv6dZnMe_ZcMjXgs8Bkg/o.jpg",
+         "is_closed" : false,
+         "location" : {
+            "address1" : "621 Congress Ave",
+            "address2" : null,
+            "address3" : "",
+            "city" : "Austin",
+            "country" : "US",
+            "display_address" : [
+               "621 Congress Ave",
+               "Austin, TX 78701"
+            ],
+            "state" : "TX",
+            "zip_code" : "78701"
+         },
+         "name" : "Upstairs at Caroline",
+         "phone" : "+15129826766",
+         "price" : "$$",
+         "rating" : 4.5,
+         "review_count" : 541,
+         "transactions" : [
+            "delivery"
+         ],
+         "url" : "https://www.yelp.com/biz/upstairs-at-caroline-austin?adjust_creative=Qep_uWAAxzkJwF7Z2AHVIA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=Qep_uWAAxzkJwF7Z2AHVIA"
+      },
+      {
+         "alias" : "the-cat-s-pajamas-austin",
+         "categories" : [
+            {
+               "alias" : "bars",
+               "title" : "Bars"
+            }
+         ],
+         "coordinates" : {
+            "latitude" : 30.2705104673353,
+            "longitude" : -97.7484380293196
+         },
+         "display_phone" : "(512) 593-2649",
+         "distance" : 1963.08767085577,
+         "id" : "Zj55kuiU_4K-H-Is2TaIbw",
+         "image_url" : "https://s3-media3.fl.yelpcdn.com/bphoto/pc0FAHstPuAE1w_RHuOr-A/o.jpg",
+         "is_closed" : false,
+         "location" : {
+            "address1" : "610 Nueces St",
+            "address2" : "",
+            "address3" : null,
+            "city" : "Austin",
+            "country" : "US",
+            "display_address" : [
+               "610 Nueces St",
+               "Austin, TX 78701"
+            ],
+            "state" : "TX",
+            "zip_code" : "78701"
+         },
+         "name" : "The Cat’s Pajamas",
+         "phone" : "+15125932649",
+         "price" : "$$",
+         "rating" : 4,
+         "review_count" : 63,
+         "transactions" : [],
+         "url" : "https://www.yelp.com/biz/the-cat-s-pajamas-austin?adjust_creative=Qep_uWAAxzkJwF7Z2AHVIA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=Qep_uWAAxzkJwF7Z2AHVIA"
+      },
+      {
+         "alias" : "midnight-cowboy-austin",
+         "categories" : [
+            {
+               "alias" : "speakeasies",
+               "title" : "Speakeasies"
+            }
+         ],
+         "coordinates" : {
+            "latitude" : 30.266983,
+            "longitude" : -97.740028
+         },
+         "display_phone" : "(512) 843-2715",
+         "distance" : 2008.62609303675,
+         "id" : "Ef-9J6ToOcrAJ6tL0Pn_HA",
+         "image_url" : "https://s3-media3.fl.yelpcdn.com/bphoto/mu6IHz1gGVT7W3pzcX1ffg/o.jpg",
+         "is_closed" : false,
+         "location" : {
+            "address1" : "313 E 6th St",
+            "address2" : "",
+            "address3" : "",
+            "city" : "Austin",
+            "country" : "US",
+            "display_address" : [
+               "313 E 6th St",
+               "Austin, TX 78701"
+            ],
+            "state" : "TX",
+            "zip_code" : "78701"
+         },
+         "name" : "Midnight Cowboy",
+         "phone" : "+15128432715",
+         "price" : "$$",
+         "rating" : 4,
+         "review_count" : 520,
+         "transactions" : [],
+         "url" : "https://www.yelp.com/biz/midnight-cowboy-austin?adjust_creative=Qep_uWAAxzkJwF7Z2AHVIA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=Qep_uWAAxzkJwF7Z2AHVIA"
+      },
+      {
+         "alias" : "otopia-austin-4",
+         "categories" : [
+            {
+               "alias" : "lounges",
+               "title" : "Lounges"
+            }
+         ],
+         "coordinates" : {
+            "latitude" : 30.28223,
+            "longitude" : -97.74291
+         },
+         "display_phone" : "(737) 243-9040",
+         "distance" : 661.517072755716,
+         "id" : "QGrpkL06Or5gJxL6YH8ZBg",
+         "image_url" : "https://s3-media3.fl.yelpcdn.com/bphoto/lRJI42krdhu7UKUwI6TwwQ/o.jpg",
+         "is_closed" : false,
+         "location" : {
+            "address1" : "1901 San Antonio St",
+            "address2" : "Unit 1100",
+            "address3" : null,
+            "city" : "Austin",
+            "country" : "US",
+            "display_address" : [
+               "1901 San Antonio St",
+               "Unit 1100",
+               "Austin, TX 78705"
+            ],
+            "state" : "TX",
+            "zip_code" : "78705"
+         },
+         "name" : "Otopia",
+         "phone" : "+17372439040",
+         "rating" : 4,
+         "review_count" : 33,
+         "transactions" : [
+            "delivery"
+         ],
+         "url" : "https://www.yelp.com/biz/otopia-austin-4?adjust_creative=Qep_uWAAxzkJwF7Z2AHVIA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=Qep_uWAAxzkJwF7Z2AHVIA"
+      },
+      {
+         "alias" : "higher-ground-austin",
+         "categories" : [
+            {
+               "alias" : "tapasmallplates",
+               "title" : "Tapas/Small Plates"
+            },
+            {
+               "alias" : "cocktailbars",
+               "title" : "Cocktail Bars"
+            }
+         ],
+         "coordinates" : {
+            "latitude" : 30.26978,
+            "longitude" : -97.7424
+         },
+         "display_phone" : "(512) 291-2060",
+         "distance" : 1771.80566633533,
+         "id" : "8fNk1tcxZpkVAs1_hqebLA",
+         "image_url" : "https://s3-media3.fl.yelpcdn.com/bphoto/vBRrRTIWGtbWdZHXow80PQ/o.jpg",
+         "is_closed" : false,
+         "location" : {
+            "address1" : "720 Congress Ave",
+            "address2" : "",
+            "address3" : null,
+            "city" : "Austin",
+            "country" : "US",
+            "display_address" : [
+               "720 Congress Ave",
+               "Austin, TX 78701"
+            ],
+            "state" : "TX",
+            "zip_code" : "78701"
+         },
+         "name" : "Higher Ground",
+         "phone" : "+15122912060",
+         "price" : "$$",
+         "rating" : 4,
+         "review_count" : 177,
+         "transactions" : [],
+         "url" : "https://www.yelp.com/biz/higher-ground-austin?adjust_creative=Qep_uWAAxzkJwF7Z2AHVIA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=Qep_uWAAxzkJwF7Z2AHVIA"
+      },
+      {
+         "alias" : "dive-bar-and-lounge-austin",
+         "categories" : [
+            {
+               "alias" : "divebars",
+               "title" : "Dive Bars"
+            },
+            {
+               "alias" : "cocktailbars",
+               "title" : "Cocktail Bars"
+            }
+         ],
+         "coordinates" : {
+            "latitude" : 30.27971,
+            "longitude" : -97.74195
+         },
+         "display_phone" : "(512) 686-8325",
+         "distance" : 772.5390848346,
+         "id" : "TRMSNc6MM_YRzT1YnaEmWA",
+         "image_url" : "https://s3-media2.fl.yelpcdn.com/bphoto/XHeauhOnyDy-BjOU3iR58g/o.jpg",
+         "is_closed" : false,
+         "location" : {
+            "address1" : "1703 Guadalupe St",
+            "address2" : "",
+            "address3" : "",
+            "city" : "Austin",
+            "country" : "US",
+            "display_address" : [
+               "1703 Guadalupe St",
+               "Austin, TX 78701"
+            ],
+            "state" : "TX",
+            "zip_code" : "78701"
+         },
+         "name" : "Dive Bar and Lounge",
+         "phone" : "+15126868325",
+         "price" : "$",
+         "rating" : 4.5,
+         "review_count" : 174,
+         "transactions" : [],
+         "url" : "https://www.yelp.com/biz/dive-bar-and-lounge-austin?adjust_creative=Qep_uWAAxzkJwF7Z2AHVIA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=Qep_uWAAxzkJwF7Z2AHVIA"
+      },
+      {
+         "alias" : "bar-mischief-austin",
+         "categories" : [
+            {
+               "alias" : "cocktailbars",
+               "title" : "Cocktail Bars"
+            }
+         ],
+         "coordinates" : {
+            "latitude" : 30.2639857014908,
+            "longitude" : -97.7296862452852
+         },
+         "display_phone" : "(512) 289-2320",
+         "distance" : 2421.78212629153,
+         "id" : "YMYAo82PuD9qaVwRESTchA",
+         "image_url" : "https://s3-media4.fl.yelpcdn.com/bphoto/HDKjbbKY6kD9Gl3_brxUNg/o.jpg",
+         "is_closed" : false,
+         "location" : {
+            "address1" : "1221 E 6th St",
+            "address2" : "",
+            "address3" : null,
+            "city" : "Austin",
+            "country" : "US",
+            "display_address" : [
+               "1221 E 6th St",
+               "Austin, TX 78702"
+            ],
+            "state" : "TX",
+            "zip_code" : "78702"
+         },
+         "name" : "Bar Mischief",
+         "phone" : "+15122892320",
+         "rating" : 4.5,
+         "review_count" : 2,
+         "transactions" : [],
+         "url" : "https://www.yelp.com/biz/bar-mischief-austin?adjust_creative=Qep_uWAAxzkJwF7Z2AHVIA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=Qep_uWAAxzkJwF7Z2AHVIA"
+      },
+      {
+         "alias" : "mama-dearest-austin",
+         "categories" : [
+            {
+               "alias" : "bars",
+               "title" : "Bars"
+            }
+         ],
+         "coordinates" : {
+            "latitude" : 30.258475,
+            "longitude" : -97.714666
+         },
+         "display_phone" : "",
+         "distance" : 3618.32692008225,
+         "id" : "zaJIC5aZzNwCLAkkmRGFDw",
+         "image_url" : "https://s3-media1.fl.yelpcdn.com/bphoto/J-Yqr3RxyYsNwB3KJBMWSQ/o.jpg",
+         "is_closed" : false,
+         "location" : {
+            "address1" : "515 Pedernales St",
+            "address2" : "",
+            "address3" : null,
+            "city" : "Austin",
+            "country" : "US",
+            "display_address" : [
+               "515 Pedernales St",
+               "Austin, TX 78702"
+            ],
+            "state" : "TX",
+            "zip_code" : "78702"
+         },
+         "name" : "Mama Dearest",
+         "phone" : "",
+         "rating" : 4.5,
+         "review_count" : 12,
+         "transactions" : [],
+         "url" : "https://www.yelp.com/biz/mama-dearest-austin?adjust_creative=Qep_uWAAxzkJwF7Z2AHVIA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=Qep_uWAAxzkJwF7Z2AHVIA"
+      },
+      {
+         "alias" : "mockingbird-saloon-austin-2",
+         "categories" : [
+            {
+               "alias" : "pubs",
+               "title" : "Pubs"
+            }
+         ],
+         "coordinates" : {
+            "latitude" : 30.291548,
+            "longitude" : -97.741506
+         },
+         "display_phone" : "(512) 478-2337",
+         "distance" : 873.059281242934,
+         "id" : "VQhQ9no8qwwpYwlXqRz42g",
+         "image_url" : "https://s3-media1.fl.yelpcdn.com/bphoto/tMBrxd72A7aXYxPYhOIsPg/o.jpg",
+         "is_closed" : false,
+         "location" : {
+            "address1" : "2610 Guadalupe St",
+            "address2" : "",
+            "address3" : null,
+            "city" : "Austin",
+            "country" : "US",
+            "display_address" : [
+               "2610 Guadalupe St",
+               "Austin, TX 78705"
+            ],
+            "state" : "TX",
+            "zip_code" : "78705"
+         },
+         "name" : "Mockingbird Saloon",
+         "phone" : "+15124782337",
+         "rating" : 4.5,
+         "review_count" : 8,
+         "transactions" : [],
+         "url" : "https://www.yelp.com/biz/mockingbird-saloon-austin-2?adjust_creative=Qep_uWAAxzkJwF7Z2AHVIA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=Qep_uWAAxzkJwF7Z2AHVIA"
+      },
+      {
+         "alias" : "firehouse-lounge-austin-3",
+         "categories" : [
+            {
+               "alias" : "lounges",
+               "title" : "Lounges"
+            },
+            {
+               "alias" : "cocktailbars",
+               "title" : "Cocktail Bars"
+            }
+         ],
+         "coordinates" : {
+            "latitude" : 30.268173,
+            "longitude" : -97.741043
+         },
+         "display_phone" : "(512) 201-2522",
+         "distance" : 1909.95931617129,
+         "id" : "Nyt-CEuXN6yMgDbywso-RQ",
+         "image_url" : "https://s3-media3.fl.yelpcdn.com/bphoto/qcxIIIn10xzW3ihxfCprQg/o.jpg",
+         "is_closed" : false,
+         "location" : {
+            "address1" : "605 Brazos St",
+            "address2" : null,
+            "address3" : "",
+            "city" : "Austin",
+            "country" : "US",
+            "display_address" : [
+               "605 Brazos St",
+               "Austin, TX 78701"
+            ],
+            "state" : "TX",
+            "zip_code" : "78701"
+         },
+         "name" : "Firehouse Lounge",
+         "phone" : "+15122012522",
+         "price" : "$$",
+         "rating" : 4,
+         "review_count" : 520,
+         "transactions" : [
+            "delivery"
+         ],
+         "url" : "https://www.yelp.com/biz/firehouse-lounge-austin-3?adjust_creative=Qep_uWAAxzkJwF7Z2AHVIA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=Qep_uWAAxzkJwF7Z2AHVIA"
+      },
+      {
+         "alias" : "latchkey-austin",
+         "categories" : [
+            {
+               "alias" : "divebars",
+               "title" : "Dive Bars"
+            }
+         ],
+         "coordinates" : {
+            "latitude" : 30.26409,
+            "longitude" : -97.72863
+         },
+         "display_phone" : "",
+         "distance" : 2455.40998650013,
+         "id" : "vlBtHWx1EQu0MqoWu5I4fQ",
+         "image_url" : "https://s3-media2.fl.yelpcdn.com/bphoto/5zZ1zfr9XkrYDLZaylsVzg/o.jpg",
+         "is_closed" : false,
+         "location" : {
+            "address1" : "1308 E 6th St",
+            "address2" : "",
+            "address3" : null,
+            "city" : "Austin",
+            "country" : "US",
+            "display_address" : [
+               "1308 E 6th St",
+               "Austin, TX 78702"
+            ],
+            "state" : "TX",
+            "zip_code" : "78702"
+         },
+         "name" : "Latchkey",
+         "phone" : "",
+         "rating" : 4.5,
+         "review_count" : 31,
+         "transactions" : [
+            "delivery"
+         ],
+         "url" : "https://www.yelp.com/biz/latchkey-austin?adjust_creative=Qep_uWAAxzkJwF7Z2AHVIA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=Qep_uWAAxzkJwF7Z2AHVIA"
+      },
+      {
+         "alias" : "azul-rooftop-austin",
+         "categories" : [
+            {
+               "alias" : "cocktailbars",
+               "title" : "Cocktail Bars"
+            },
+            {
+               "alias" : "lounges",
+               "title" : "Lounges"
+            }
+         ],
+         "coordinates" : {
+            "latitude" : 30.266635,
+            "longitude" : -97.740319
+         },
+         "display_phone" : "(512) 792-5622",
+         "distance" : 2066.70472550954,
+         "id" : "K-KY54053J3RfNFddmIa-w",
+         "image_url" : "https://s3-media1.fl.yelpcdn.com/bphoto/oMwJqkxQkqg1N9cYXK4Tcg/o.jpg",
+         "is_closed" : false,
+         "location" : {
+            "address1" : "310 E 5th St",
+            "address2" : null,
+            "address3" : "",
+            "city" : "Austin",
+            "country" : "US",
+            "display_address" : [
+               "310 E 5th St",
+               "Austin, TX 78701"
+            ],
+            "state" : "TX",
+            "zip_code" : "78701"
+         },
+         "name" : "Azul Rooftop",
+         "phone" : "+15127925622",
+         "price" : "$$",
+         "rating" : 4,
+         "review_count" : 109,
+         "transactions" : [
+            "delivery"
+         ],
+         "url" : "https://www.yelp.com/biz/azul-rooftop-austin?adjust_creative=Qep_uWAAxzkJwF7Z2AHVIA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=Qep_uWAAxzkJwF7Z2AHVIA"
+      },
+      {
+         "alias" : "zanzibar-austin-3",
+         "categories" : [
+            {
+               "alias" : "tikibars",
+               "title" : "Tiki Bars"
+            },
+            {
+               "alias" : "lounges",
+               "title" : "Lounges"
+            }
+         ],
+         "coordinates" : {
+            "latitude" : 30.26273,
+            "longitude" : -97.74158
+         },
+         "display_phone" : "(737) 787-6969",
+         "distance" : 2516.18228609161,
+         "id" : "hJjnm0Vi_53sfqnAgQbFJQ",
+         "image_url" : "https://s3-media2.fl.yelpcdn.com/bphoto/oNEkJWOcJQ9jcpzgfZKjkA/o.jpg",
+         "is_closed" : false,
+         "location" : {
+            "address1" : "304 E Cesar Chavez St",
+            "address2" : "Unit 700",
+            "address3" : null,
+            "city" : "Austin",
+            "country" : "US",
+            "display_address" : [
+               "304 E Cesar Chavez St",
+               "Unit 700",
+               "Austin, TX 78701"
+            ],
+            "state" : "TX",
+            "zip_code" : "78701"
+         },
+         "name" : "Zanzibar",
+         "phone" : "+17377876969",
+         "rating" : 4,
+         "review_count" : 401,
+         "transactions" : [
+            "delivery"
+         ],
+         "url" : "https://www.yelp.com/biz/zanzibar-austin-3?adjust_creative=Qep_uWAAxzkJwF7Z2AHVIA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=Qep_uWAAxzkJwF7Z2AHVIA"
+      },
+      {
+         "alias" : "edge-rooftop-austin",
+         "categories" : [
+            {
+               "alias" : "lounges",
+               "title" : "Lounges"
+            },
+            {
+               "alias" : "cocktailbars",
+               "title" : "Cocktail Bars"
+            }
+         ],
+         "coordinates" : {
+            "latitude" : 30.2643864129296,
+            "longitude" : -97.7436428743045
+         },
+         "display_phone" : "(512) 608-4503",
+         "distance" : 2380.7618985537,
+         "id" : "kYjUtCvtf7I-lqpZpS7p8A",
+         "image_url" : "https://s3-media3.fl.yelpcdn.com/bphoto/WAqh4Npxdk-7vNPU0BuReQ/o.jpg",
+         "is_closed" : false,
+         "location" : {
+            "address1" : "110 E 2nd St",
+            "address2" : "",
+            "address3" : null,
+            "city" : "Austin",
+            "country" : "US",
+            "display_address" : [
+               "110 E 2nd St",
+               "Austin, TX 78701"
+            ],
+            "state" : "TX",
+            "zip_code" : "78701"
+         },
+         "name" : "Edge Rooftop",
+         "phone" : "+15126084503",
+         "price" : "$$",
+         "rating" : 4.5,
+         "review_count" : 140,
+         "transactions" : [],
+         "url" : "https://www.yelp.com/biz/edge-rooftop-austin?adjust_creative=Qep_uWAAxzkJwF7Z2AHVIA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=Qep_uWAAxzkJwF7Z2AHVIA"
+      },
+      {
+         "alias" : "draught-house-pub-and-brewery-austin",
+         "categories" : [
+            {
+               "alias" : "brewpubs",
+               "title" : "Brewpubs"
+            },
+            {
+               "alias" : "beergardens",
+               "title" : "Beer Gardens"
+            }
+         ],
+         "coordinates" : {
+            "latitude" : 30.31098,
+            "longitude" : -97.74283
+         },
+         "display_phone" : "(512) 452-6258",
+         "distance" : 2966.46091794913,
+         "id" : "YUCAPAhFfltJmqKb7HjNXw",
+         "image_url" : "https://s3-media1.fl.yelpcdn.com/bphoto/Pj5ah19zRqwyfmX3QZXuMg/o.jpg",
+         "is_closed" : false,
+         "location" : {
+            "address1" : "4112 Medical Pkwy",
+            "address2" : "",
+            "address3" : "",
+            "city" : "Austin",
+            "country" : "US",
+            "display_address" : [
+               "4112 Medical Pkwy",
+               "Austin, TX 78756"
+            ],
+            "state" : "TX",
+            "zip_code" : "78756"
+         },
+         "name" : "Draught House Pub & Brewery",
+         "phone" : "+15124526258",
+         "price" : "$$",
+         "rating" : 4.5,
+         "review_count" : 601,
+         "transactions" : [
+            "delivery"
+         ],
+         "url" : "https://www.yelp.com/biz/draught-house-pub-and-brewery-austin?adjust_creative=Qep_uWAAxzkJwF7Z2AHVIA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=Qep_uWAAxzkJwF7Z2AHVIA"
+      },
+      {
+         "alias" : "garage-austin-2",
+         "categories" : [
+            {
+               "alias" : "cocktailbars",
+               "title" : "Cocktail Bars"
+            }
+         ],
+         "coordinates" : {
+            "latitude" : 30.26796,
+            "longitude" : -97.7440893
+         },
+         "display_phone" : "(512) 369-3490",
+         "distance" : 2017.58578923133,
+         "id" : "JF6tshUSeH8U9eRDemzI7Q",
+         "image_url" : "https://s3-media2.fl.yelpcdn.com/bphoto/KS2DyaEmZMVevT_tgfX7Ow/o.jpg",
+         "is_closed" : false,
+         "location" : {
+            "address1" : "503 Colorado St",
+            "address2" : "",
+            "address3" : "",
+            "city" : "Austin",
+            "country" : "US",
+            "display_address" : [
+               "503 Colorado St",
+               "Austin, TX 78701"
+            ],
+            "state" : "TX",
+            "zip_code" : "78701"
+         },
+         "name" : "Garage",
+         "phone" : "+15123693490",
+         "price" : "$$",
+         "rating" : 4,
+         "review_count" : 363,
+         "transactions" : [],
+         "url" : "https://www.yelp.com/biz/garage-austin-2?adjust_creative=Qep_uWAAxzkJwF7Z2AHVIA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=Qep_uWAAxzkJwF7Z2AHVIA"
+      },
+      {
+         "alias" : "salty-sow-austin",
+         "categories" : [
+            {
+               "alias" : "tradamerican",
+               "title" : "American (Traditional)"
+            },
+            {
+               "alias" : "gastropubs",
+               "title" : "Gastropubs"
+            }
+         ],
+         "coordinates" : {
+            "latitude" : 30.2836497259461,
+            "longitude" : -97.7213180065155
+         },
+         "display_phone" : "(512) 391-2337",
+         "distance" : 1477.22013799589,
+         "id" : "AcFt364BrHyMu3VrSCKMOw",
+         "image_url" : "https://s3-media2.fl.yelpcdn.com/bphoto/-thmBtu1fhKvgEb4i813Cg/o.jpg",
+         "is_closed" : false,
+         "location" : {
+            "address1" : "1917 Manor Rd",
+            "address2" : "",
+            "address3" : "",
+            "city" : "Austin",
+            "country" : "US",
+            "display_address" : [
+               "1917 Manor Rd",
+               "Austin, TX 78722"
+            ],
+            "state" : "TX",
+            "zip_code" : "78722"
+         },
+         "name" : "Salty Sow",
+         "phone" : "+15123912337",
+         "price" : "$$",
+         "rating" : 4.5,
+         "review_count" : 3213,
+         "transactions" : [
+            "delivery"
+         ],
+         "url" : "https://www.yelp.com/biz/salty-sow-austin?adjust_creative=Qep_uWAAxzkJwF7Z2AHVIA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=Qep_uWAAxzkJwF7Z2AHVIA"
+      }
+   ],
+   "region" : {
+      "center" : {
+         "latitude" : 30.2849231,
+         "longitude" : -97.7366316
+      }
+   },
+   "total" : 541
+}
+`;
