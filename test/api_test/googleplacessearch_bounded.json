@@ -1,0 +1,62 @@
+{
+   "candidates" : 
+   [
+      {
+         "business_status" : "OPERATIONAL",
+         "formatted_address" : "12859 NE 85th St, Kirkland, WA 98033, United States",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 47.6790811,
+               "lng" : -122.1671632
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 47.68051282989273,
+                  "lng" : -122.1658025201072
+               },
+               "southwest" : 
+               {
+                  "lat" : 47.67781317010728,
+                  "lng" : -122.1685021798927
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/bar-71.png",
+         "icon_background_color" : "#FF9E67",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/bar_pinlet",
+         "name" : "Pub 85",
+         "photos" : 
+         [
+            {
+               "height" : 3024,
+               "html_attributions" : 
+               [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/109789269080400830163\"\u003eAshish Mittal\u003c/a\u003e"
+               ],
+               "photo_reference" : "ATJ83zjGE2ynlzl6W1IqU_ebLeBAdd7z4MFdUILoVmDOigx6AJoFq1FFRECfh2HIt5GWwzhghd8W4IxpE3SIAfeQzn-PWD8ibSheJR5s4-i-QlwL2j7KrwIoxZT22ZsEojO1NNRcloB0fuZjddWqfBikcN8bgwOUqWlh67MpaB9pRYQR7imn",
+               "width" : 4032
+            }
+         ],
+         "place_id" : "ChIJb-sFLKUSkFQRnzLVaIyA1ts",
+         "plus_code" : 
+         {
+            "compound_code" : "MRHM+J4 Kirkland, Washington, USA",
+            "global_code" : "84VVMRHM+J4"
+         },
+         "types" : 
+         [
+            "meal_takeaway",
+            "bar",
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+         ]
+      }
+   ],
+   "status" : "OK"
+}
