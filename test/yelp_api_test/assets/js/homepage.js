@@ -57,26 +57,47 @@ var getYelpSearch = function (search) {
     radius;
 
   console.log("will fetch ", apiUrl);
-  var data = JSON.parse(yelp_b_searchexample);
-  console.log(data);
-  displayYelpBusinesses(data, search);
+//  var data = JSON.parse(yelp_b_searchexample);
+//  console.log(data);
+//  displayYelpBusinesses(data, search);
 
-  /* Current fetch has problems due to CORS
+  /* Current fetch has problems due to CORS */
+
+  var myHeaders = new Headers();
+  myHeaders.append("Authorization", "Bearer E_PPY2I4Kj_RTIlu5iBCzVSdbNhgM8698ypfBPe7-KM3JkJfHtxBjWd5x6KOuvG_2OORfPPl-wb5vpDrVgbttjhU2F7aC2OJATUzhX6CDa0_i5KL2zneMFcyuLUIZXYx");
+  myHeaders.append("Cookie", "__cfduid=db290300ecfe95ec1fe3bc92c388c3c991586618117");
+  myHeaders.append("Access-Control-Allow-Origin", "*");
+  
+  var proxyUrl = 'https://cors-anywhere.herokuapp.com/'
+  // var targetUrl = 'https://api.yelp.com/v3/businesses/search?location=Houston'
+  var targetUrl = 'https://api.yelp.com/v3/businesses/search?term=bar&latitude=30.2849231&longitude=-97.7366316&radius=5000&limit=20';
+  
+  var requestOptions = {
+    method: 'GET',
+    headers: myHeaders,
+    redirect: 'follow'
+  };
+  
+  fetch(proxyUrl + targetUrl, requestOptions)
+/*
   fetch(apiUrl, {
     method: "GET", // POST, PUT, DELETE, etc.
-    mode: 'cors',
+    //mode: 'cors',
     headers: {
+      "x-requested-with": "xmlhttprequest",
+      "Access-Control-Allow-Origin": "*",
       // "Content-Type": "text/plain;charset=UTF-8"
-      Authorization: "Bearer " + myapikeys.yelp, // API key is in headers for Yelp API
-      Accept: "application/json",
+      "Authorization": "Bearer " + myapikeys.yelp, // API key is in headers for Yelp API
+      "Accept": "application/json",
+      "redirect": 'follow'
     },
-  })
+  }) */
     .then(function (response) {
       if (response.ok) {
         console.log(response);
         response.json().then(function (data) {
           console.log(data);
-          displayYelpBusinesses(data, user);
+          displayYelpBusinesses(data, "user");
         });
       } else {
         alert("Error: " + response.statusText);
@@ -85,7 +106,7 @@ var getYelpSearch = function (search) {
     .catch(function (error) {
       alert("Unable to connect to Yelp");
     });
-    */
+    /**/
 };
 
 var getUserRepos = function (user) {
