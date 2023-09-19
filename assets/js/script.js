@@ -7,19 +7,19 @@ var padding = {top:20, right:40, bottom:0, left:0},
             picked = 100000,
             oldpick = [],
             color = d3.scale.category20();//category20c()
-            //randomNumbers = getRandomNumbers();
+            //randomNumbers = getRandomNumbers()
         //http://osric.com/bingo-card-generator/?title=HTML+and+CSS+BINGO!&words=padding%2Cfont-family%2Ccolor%2Cfont-weight%2Cfont-size%2Cbackground-color%2Cnesting%2Cbottom%2Csans-serif%2Cperiod%2Cpound+sign%2C%EF%B9%A4body%EF%B9%A5%2C%EF%B9%A4ul%EF%B9%A5%2C%EF%B9%A4h1%EF%B9%A5%2Cmargin%2C%3C++%3E%2C{+}%2C%EF%B9%A4p%EF%B9%A5%2C%EF%B9%A4!DOCTYPE+html%EF%B9%A5%2C%EF%B9%A4head%EF%B9%A5%2Ccolon%2C%EF%B9%A4style%EF%B9%A5%2C.html%2CHTML%2CCSS%2CJavaScript%2Cborder&freespace=true&freespaceValue=Web+Design+Master&freespaceRandom=false&width=5&height=5&number=35#results
         var data = [
-                    {"label":"Dell LAPTOP",  "value":1,  "question":"What CSS property is used for specifying the area between the content and its border?"}, // padding
-                    {"label":"IMAC PRO",  "value":2,  "question":"What CSS property is used for changing the font?"}, //font-family
-                    {"label":"SUZUKI",  "value":3,  "question":"What CSS property is used for changing the color of text?"}, //color
-                    {"label":"HONDA",  "value":4,  "question":"What CSS property is used for changing the boldness of text?"}, //font-weight
-                    {"label":"FERRARI",  "value":5,  "question":"What CSS property is used for changing the size of text?"}, //font-size
-                    {"label":"APARTMENT",  "value":6,  "question":"What CSS property is used for changing the background color of a box?"}, //background-color
-                    {"label":"IPAD PRO",  "value":7,  "question":"Which word is used for specifying an HTML tag that is inside another tag?"}, //nesting
-                    {"label":"LAND",  "value":8,  "question":"Which side of the box is the third number in: margin:1px 1px 1px 1px; ?"}, //bottom
-                    {"label":"MOTOROLLA",  "value":9,  "question":"What are the fonts that don't have serifs at the ends of letters called?"}, //sans-serif
-                    {"label":"BMW", "value":10, "question":"With CSS selectors, what character prefix should one use to specify a class?"}
+                    {"label":"Dell LAPTOP",  "value":1, "barCard":"Bar Info"}, // padding
+                    {"label":"IMAC PRO",  "value":2, "barCard":"Bar nfo"}, //font-family
+                    {"label":"SUZUKI",  "value":3, "barCard":"Bar Info"}, //color
+                    {"label":"HONDA",  "value":4, "barCard":"Bar Info"}, //font-weight
+                    {"label":"FERRARI",  "value":5, "barCard":"Bar Info"}, //font-size
+                    {"label":"APARTMENT",  "value":6, "barCard":"Bar Info"}, //background-color
+                    {"label":"IPAD PRO",  "value":7, "barCard":"Bar Info"}, //nesting
+                    {"label":"LAND",  "value":8, "barCard":"Bar Info"}, //bottom
+                    {"label":"MOTOROLLA",  "value":9, "barCard":"Bar Info"}, //sans-serif
+                    {"label":"BMW", "value":10, "barCard":"Bar Info"}
         ];
         var svg = d3.select('#chart')
             .append("svg")
@@ -90,8 +90,8 @@ var padding = {top:20, right:40, bottom:0, left:0},
                     d3.select(".slice:nth-child(" + (picked + 1) + ") path")
                         .attr("fill", "#111");
                     //populate question
-                    d3.select("#question h1")
-                        .text(data[picked].question);
+                    d3.select("#bar-card h1")
+                        .text(data[picked].barCard);
                     oldrotation = rotation;
               
                     /* Get the result value from object "data" */
