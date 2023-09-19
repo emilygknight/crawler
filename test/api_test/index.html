@@ -9,14 +9,14 @@
   <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,400i,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
   <link rel="stylesheet" href="./assets/css/style.css" />
-  <title>Git it Done</title>
+  <title>Search it All</title>
 </head>
 
 <body class="flex-column min-100-vh">
   <header class="hero">
     <h1 class="app-title">
       <!-- The `<i>` element is for icons. These classes come from the Font Awesome font icon library. -->
-      <i class="fab fa-github"></i>Yelp API tester
+      <i class="fab fa-yelp"></i>Yelp & <i class="fab fa-google"></i> Google API tester
     </h1>
     <p>Enter an input to test it on the Yelp API
     </p>
@@ -31,7 +31,11 @@
         <form id="user-form" class="card-body">
           <label class="form-label" for="username">Search term</label>
           <input name="username" id="username" type="text" autofocus="true" class="form-input" />
-          <button type="submit" class="btn">Get User</button>
+          <button type="submit" class="btn">Search term</button>
+          <input type="radio" id="syelp" name="whichapi" value="yelp">
+          <label for="syelp">Yelp</label><br>
+          <input type="radio" id="sgoogle" name="whichapi" value="google" checked="checked">
+          <label for="sgoogle">Google</label><br>
         </form>
       </div>
 
@@ -47,14 +51,14 @@
     </div>
 
     <div class="col-12 col-md-8">
-      <h2 class="subtitle">Showing Repositories for: <span id="repo-search-term"></span></h2>
+      <h2 class="subtitle">Showing results for: <span id="my-search-term"></span></h2>
+      <h3 class="subtitle">Fetch url: <span id="api-url"></span></h3>
       <!-- There needs to be an empty HTML element for us to write repository data to. -->
       <div id="repos-container" class="list-group"></div>
     </div>
   </main>
 
   <script src="./assets/js/private.js"></script>
-  <script src="./yelpbusinesssearch.json"></script>
   <script src="./assets/js/homepage.js"></script>
 </body>
 
