@@ -1,3 +1,10 @@
+const apiUrl =  "https://maps.googleapis.com/maps/api/place/nearbysearch/json";
+const apiKey = "AIzaSyDgDdbhiFfUAdTe9zAxr59nArS85Vuc4PA";
+console.log(navigator.geolocation.getCurrentPosition());
+
+
+//Code for the wheel
+
 var padding = {top:20, right:40, bottom:0, left:0},
             w = 500 - padding.left - padding.right,
             h = 500 - padding.top  - padding.bottom,
