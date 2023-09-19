@@ -4,20 +4,20 @@ text{
     pointer-events:none;
 }
 #chart{
-    position:absolute;
+    position:flex;
     width:500px;
     height:500px;
     top:0;
     left:0;
 }
-#question{
+#bar-card{
     position: absolute;
     width:400px;
     height:500px;
     top:0;
     left:520px;
 }
-#question h1{
+#bar-card h1{
     font-size: 50px;
     font-weight: bold;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;

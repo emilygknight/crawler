@@ -12,64 +12,6 @@
 
 <body>
 
-    <div id="chart"></div>
-    <div id="question"><h1></h1></div>
-    
-    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-
-
-
-    <!-- add navbar -->
-
-
-
-    
-    <div class="navbar bg-base-100">
-        <div class="navbar-start">
-            <div class="dropdown">
-                <label tabindex="0" class="btn btn-ghost lg:hidden">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h8m-8 6h16" />
-                    </svg>
-                </label>
-                <ul tabindex="0"
-                    class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                    <li><a>Item 1</a></li>
-                    <li>
-                        <a>Parent</a>
-                        <ul class="p-2">
-                            <li><a>Submenu 1</a></li>
-                            <li><a>Submenu 2</a></li>
-                        </ul>
-                    </li>
-                    <li><a>Item 3</a></li>
-                </ul>
-            </div>
-            <a class="btn btn-ghost normal-case text-xl">daisyUI</a>
-        </div>
-        <div class="navbar-center hidden lg:flex">
-            <ul class="menu menu-horizontal px-1">
-                <li><a>Item 1</a></li>
-                <li tabindex="0">
-                    <details>
-                        <summary>Parent</summary>
-                        <ul class="p-2">
-                            <li><a>Submenu 1</a></li>
-                            <li><a>Submenu 2</a></li>
-                        </ul>
-                    </details>
-                </li>
-                <li><a>Item 3</a></li>
-            </ul>
-        </div>
-        <div class="navbar-end">
-            <a class="btn">Button</a>
-        </div>
-    </div>
-    <!-- end navbar -->
-
     <!-- Title Header -->
     <header class="bg-gradient-to-r from-secondary to-primary m-1 rounded-lg w-[100%-5px]">
         <!-- style="background-image: url(https://daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg);" -->
@@ -78,7 +20,7 @@
             <h1 class="mb-1 text-5xl font-bold">Bar Crawler</h1>
         </div>
     </header>
-
+    
     <!-- row -->
     <main class="flex m-1 gap-1">
 
@@ -94,17 +36,11 @@
             <!-- search section for cities -->
             <section class="form-control w-full">
                 <label class="label">
-                    <span class="label-text w-full max-w-xs text-2xl">Search for a City</span>
+                    <span class="label-text w-full max-w-xs text-2xl">Search for City</span>
                 </label>
                 <input type="text" placeholder="Type here" class="input input-bordered w-full input-primary" />
             </section>
 
-            <ul class="menu bg-base-200 w-56 rounded-box w-full text-2xl">
-                <li class="menu-title"> Select a City</li>
-                <li><a>Item 1</a></li>
-                <li><a>Item 2</a></li>
-                <li><a>Item 3</a></li>
-            </ul>
         </aside>
 
         <!-- column 2 - forecast results column-->
@@ -115,96 +51,14 @@
                 <div class="text-neutral-content w-full p-5">
                     <div class="text-left">
                         <h1 class="mb-5 text-4xl font-bold">Bar results</h1>
-                        <p class="mb-5">This is the 5-day bar forecast for <span id="selectedcity">City</span></p>
                     </div>
                 </div>
             </div>
-
-            <!-- 5 cards showing future bar predictions -->
-            <div class="flex w-full gap-1 my-1">
-
-                <!-- bar card days -->
-                <div class="card bg-base-100 shadow-xl image-full">
-                    <figure><img src="https://placekitten.com/300/200" alt="Shoes" /></figure>
-                    <div class="card-body">
-                        <h2 class="card-title">14 Sep 2023</h2>
-                        <p><span id="fcast-weathericon">☀️</span><br>
-                            Temp: <span id="fcast-temp">65</span>°<span id="fcast-tempmetrics">F</span><br>
-                            Wind: <span id="fcast-wind"></span>20mph<br>
-                            Humidity: <span id="fcast_humidity">65%</span>
-                        </p>
-                        <div class="card-actions justify-end">
-                            <button class="btn btn-primary">Details</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- bar card days -->
-                <div class="card bg-base-100 shadow-xl image-full">
-                    <figure><img src="https://placekitten.com/300/200" alt="Shoes" /></figure>
-                    <div class="card-body">
-                        <h2 class="card-title">14 Sep 2023</h2>
-                        <p><span id="fcast-weathericon">☀️</span><br>
-                            Temp: <span id="fcast-temp">65</span>°<span id="fcast-tempmetrics">F</span><br>
-                            Wind: <span id="fcast-wind"></span>20mph<br>
-                            Humidity: <span id="fcast_humidity">65%</span>
-                        </p>
-                        <div class="card-actions justify-end">
-                            <button class="btn btn-primary">Details</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- bar card days -->
-                <div class="card bg-base-100 shadow-xl image-full">
-                    <figure><img src="https://placekitten.com/300/200" alt="Shoes" /></figure>
-                    <div class="card-body">
-                        <h2 class="card-title">14 Sep 2023</h2>
-                        <p><span id="fcast-weathericon">☀️</span><br>
-                            Temp: <span id="fcast-temp">65</span>°<span id="fcast-tempmetrics">F</span><br>
-                            Wind: <span id="fcast-wind"></span>20mph<br>
-                            Humidity: <span id="fcast_humidity">65%</span>
-                        </p>
-                        <div class="card-actions justify-end">
-                            <button class="btn btn-primary">Details</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- bar card days -->
-                <div class="card bg-base-100 shadow-xl image-full">
-                    <figure><img src="https://placekitten.com/300/200" alt="Shoes" /></figure>
-                    <div class="card-body">
-                        <h2 class="card-title">14 Sep 2023</h2>
-                        <p><span id="fcast-weathericon">☀️</span><br>
-                            Temp: <span id="fcast-temp">65</span>°<span id="fcast-tempmetrics">F</span><br>
-                            Wind: <span id="fcast-wind"></span>20mph<br>
-                            Humidity: <span id="fcast_humidity">65%</span>
-                        </p>
-                        <div class="card-actions justify-end">
-                            <button class="btn btn-primary">Details</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- bar card days -->
-                <div class="card bg-base-100 shadow-xl image-full">
-                    <figure><img src="https://placekitten.com/300/200" alt="Shoes" /></figure>
-                    <div class="card-body">
-                        <h2 class="card-title">14 Sep 2023</h2>
-                        <p><span id="fcast-weathericon">☀️</span><br>
-                            Temp: <span id="fcast-temp">65</span>°<span id="fcast-tempmetrics">F</span><br>
-                            Wind: <span id="fcast-wind"></span>20mph<br>
-                            Humidity: <span id="fcast_humidity">65%</span>
-                        </p>
-                        <div class="card-actions justify-end">
-                            <button class="btn btn-primary">Details</button>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
+            <div id="chart"></div>
+            <div id="bar-card"><h1></h1></div>
         </div>
+        
+        <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     </main>
     <button id="find-me" class="btn btn-primary">Find Me</button>
     <p id="status"></p>
