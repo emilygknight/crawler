@@ -13,19 +13,19 @@
 <body>
 
     <!-- Title Header -->
-    <header class="bg-gradient-to-r from-secondary to-primary m-1 rounded-lg w-[100%-5px]">
+    <header class="bg-gradient-to-r from-primary to-black m-1 rounded-lg w-[100%-5px]">
         <!-- style="background-image: url(https://daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg);" -->
         <div class="hero-overlay rounded-lg"></div>
         <div class="text-right text-neutral-content p-5 w-4/5">
             <h1 class="mb-1 text-5xl font-bold">Bar Crawler</h1>
         </div>
     </header>
-    
+
     <!-- row -->
     <main class="flex m-1 gap-1">
 
         <!-- column 1 aside -->
-        <aside class="flex-col w-1/4 max-w-[25%]">
+        <aside class="flex-col w-1/3 max-w-[50%]">
 
             <!-- map -->
             <iframe
@@ -36,35 +36,50 @@
             <!-- search section for cities -->
             <section class="form-control w-full">
                 <label class="label">
-                    <span class="label-text w-full max-w-xs text-2xl">Search for City</span>
+                    <span class="label-text w-full max-w-xs text-2xl">Search for:</span>
                 </label>
-                <input type="text" placeholder="Type here" class="input input-bordered w-full input-primary" />
+                <input id="whattosearch" type="text" placeholder="Type here"
+                    class="input input-bordered w-full input-primary" />
             </section>
+
+            <button id="find-me" class="btn btn-primary" onclick="geoFindMe()">Find Me</button>
+            <p id="status"></p>
+            <a id="map-link" target="_blank"></a>
 
         </aside>
 
-        <!-- column 2 - forecast results column-->
-        <div class="flex-col w-3/4">
+        <!-- column 2 - results column-->
+        <div class="flex-col w-2/3">
+
+            <!-- Wheel -->
+            <div id="chart" class="min-w-full flex justify-center"></div>
+            <div id="bar-card">
+                <h1></h1>
+            </div>
+            <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+            <!-- required script placement for wheel-->
+            <!-- end Wheel -->
+
             <div class="hero w-full rounded-lg">
-                <!-- style="background-image: url(https://daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg);" -->
                 <div class="hero-overlay bg-opacity-90"></div>
                 <div class="text-neutral-content w-full p-5">
                     <div class="text-left">
-                        <h1 class="mb-5 text-4xl font-bold">Bar results</h1>
+                        <h1 class="mb-5 text-4xl font-bold">Search results</h1>
+                    </div>
+                </div>
+                <div>
+                    <div id="barcardcontainer" class="w-full flex flex-wrap">
+
                     </div>
                 </div>
             </div>
-            <div id="chart"></div>
-            <div id="bar-card"><h1></h1></div>
+
         </div>
-        
-        <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     </main>
-    <button id="find-me" class="btn btn-primary">Find Me</button>
-    <p id="status"></p>
-    <a id="map-link" target="_blank"></a>
 </body>
+
 <script src="https://cdn.tailwindcss.com"></script>
+<script src="./assets/js/private.js"></script>
 <script src="./assets/js/script.js"></script>
 
 </html>
