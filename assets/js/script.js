@@ -82,7 +82,6 @@ function geoFindMe() {
 
 //
 function displayGooglePlace(data) {
-
   /* Add DaisyUI window element
   <div class="mockup-window border bg-base-300">
     <div class="flex justify-center px-4 py-16 bg-base-200">Hello!</div>
@@ -92,13 +91,34 @@ function displayGooglePlace(data) {
   var pickedBarCard = document.createElement("div");
   pickedBarCard.classList = "mockup-window border bg-base-300";
   var pickedBarCardContent = document.createElement("div");
-  pickedBarCardContent.classList = "flex justify-center px-4 py-16 bg-base-200";
+  pickedBarCardContent.classList = "flex flex-col flex-start px-4 py-16 bg-base-200";
   //pickedBarCardContent.innerHTML = '<p>' + data.result.editorial_summary.overview + '</p><br><p><a href="' + data.result.website + '">' + data.result.website + '"</a></p>';
   console.log(data);
-  pickedBarCardContent.innerHTML = '<p>' + "result placeholder"+ '</p><br><p><a href="' + data.result.website + '">' + data.result.website + '"</a></p>';
+
+  var pname = "";
+  var paddr = "";
+  var psummary = "";
+  var pwebsite = "";
+
+  if ("name" in data.result) {
+    pname = data.result.name;
+  }
+  if ("formatted_address" in data.result) {
+    paddr = data.result.formatted_address;
+  }
+  if ("editorial_summary" in data.result) {
+    if ("overview" in data.result.editorial_summary) {
+      psummary = data.result.editorial_summary.overview;
+    }
+  }
+  if ("website" in data.result) {
+    pwebsite = '<p>Website: <a href="' + data.result.website + '">' + data.result.website + "</a></p>";
+  }
+
+  pickedBarCardContent.innerHTML = '<h1 class="text-2xl">' + pname + "</h1><p>" + paddr + "<br>" + psummary + "</p><br>" + pwebsite;
+
   pickedBarCard.appendChild(pickedBarCardContent);
   document.getElementById("bar-card").appendChild(pickedBarCard);
-
 }
 
 // Get the place details from ther Googple Place API
@@ -239,7 +259,7 @@ var displayGoogleBusinesses = function (data) {
       wheeldata[i] = {
         label: businessname,
         value: i + 1,
-        barCard: data.results[i].name,
+        barCard: data.results[i].place_id,
       };
     }
     barcardContainerEl.appendChild(newbarcard);
