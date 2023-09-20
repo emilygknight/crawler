@@ -80,6 +80,28 @@ function geoFindMe() {
 }
 // END Get current position of the user from browser
 
+//
+function displayGooglePlace(data) {
+
+  /* Add DaisyUI window element
+  <div class="mockup-window border bg-base-300">
+    <div class="flex justify-center px-4 py-16 bg-base-200">Hello!</div>
+  </div>
+  */
+
+  var pickedBarCard = document.createElement("div");
+  pickedBarCard.classList = "mockup-window border bg-base-300";
+  var pickedBarCardContent = document.createElement("div");
+  pickedBarCardContent.classList = "flex justify-center px-4 py-16 bg-base-200";
+  //pickedBarCardContent.innerHTML = '<p>' + data.result.editorial_summary.overview + '</p><br><p><a href="' + data.result.website + '">' + data.result.website + '"</a></p>';
+  console.log(data);
+  pickedBarCardContent.innerHTML = '<p>' + "result placeholder"+ '</p><br><p><a href="' + data.result.website + '">' + data.result.website + '"</a></p>';
+  pickedBarCard.appendChild(pickedBarCardContent);
+  document.getElementById("bar-card").appendChild(pickedBarCard);
+
+}
+
+// Get the place details from ther Googple Place API
 var getGooglePlace = function (placeref) {
   // Google Place API documentation
   // https://developers.google.com/maps/documentation/places/web-service/place-id
@@ -352,9 +374,12 @@ function displayWheel(data) {
       .each("end", function () {
         //mark question as seen
         d3.select(".slice:nth-child(" + (picked + 1) + ") path").attr("fill", "#111");
-        //populate question
-        d3.select("#bar-card h1").text(data[picked].barCard);
+        //populate question  comment it out
+        d3.select("#bar-card h1").text(data[picked].name);
         oldrotation = rotation;
+
+        // display the wheel pick
+        getGooglePlace(data[picked].barCard);
 
         /* Get the result value from object "data" */
         console.log(data[picked].value);
