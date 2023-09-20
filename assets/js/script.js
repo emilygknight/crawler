@@ -93,7 +93,9 @@ function displayGooglePlace(data) {
   pickedBarCard.classList = "mockup-window border bg-base-300";
   var pickedBarCardContent = document.createElement("div");
   pickedBarCardContent.classList = "flex justify-center px-4 py-16 bg-base-200";
-  pickedBarCardContent.innerHTML = '<p>' + data.result.editorial_summary.overview + '</p><br><p><a href="' + data.result.website + '">' + data.result.website + '"</a></p>';
+  //pickedBarCardContent.innerHTML = '<p>' + data.result.editorial_summary.overview + '</p><br><p><a href="' + data.result.website + '">' + data.result.website + '"</a></p>';
+  console.log(data);
+  pickedBarCardContent.innerHTML = '<p>' + "result placeholder"+ '</p><br><p><a href="' + data.result.website + '">' + data.result.website + '"</a></p>';
   pickedBarCard.appendChild(pickedBarCardContent);
   document.getElementById("bar-card").appendChild(pickedBarCard);
 
@@ -373,7 +375,7 @@ function displayWheel(data) {
         //mark question as seen
         d3.select(".slice:nth-child(" + (picked + 1) + ") path").attr("fill", "#111");
         //populate question  comment it out
-        // d3.select("#bar-card h1").text(data[picked].barCard);
+        d3.select("#bar-card h1").text(data[picked].name);
         oldrotation = rotation;
 
         // display the wheel pick
