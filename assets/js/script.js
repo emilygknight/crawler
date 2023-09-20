@@ -217,7 +217,7 @@ var displayGoogleBusinesses = function (data) {
       wheeldata[i] = {
         label: businessname,
         value: i + 1,
-        barCard: data.results[i].place_id,
+        barCard: data.results[i].name,
       };
     }
     barcardContainerEl.appendChild(newbarcard);
