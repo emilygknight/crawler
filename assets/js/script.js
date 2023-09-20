@@ -19,6 +19,17 @@ var barcard = createElementFromHTML(
     `
 );
 
+var barlist = [];
+/* 
+var barlist = [
+  {
+    name: "Bar Name",
+    type: ["bar", "divebar"],
+    image: "http://placekitten.com/200/300",
+  },
+];
+*/
+
 // Create cards from html
 function createElementFromHTML(htmlString) {
   var div = document.createElement("div");
@@ -75,7 +86,7 @@ var getGoogleSearch = function (search) {
 
   // Example google Place API call
   // Search Nearby  <=== This is probably what we should use, searches 20 items per page
-  // curl -L -X GET 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=30.2849231%2C-97.7366316&radius=3000&keyword=bar&key=YOUR_API_KEY' -o test/yelp_api_test/googlenearbykeywordsearch2.json
+  // curl -L -X GET 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=30.2849231%2C-97.7366316&radius=3000&type=bar&key=AIzaSyDAKGh9hM6lkhtz5MNmuUehgwnvtLVjYr8' -o test/yelp_api_test/googlenearbykeywordsearch2.json
   //
   // Place Photo API
   // curl -v -L -X GET 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=ATJ83zgjwIr7QgnwAzhRmWt9sS1vo3_T7vARZ0Q-rpyE0_C0cYXKp8TU26Kyox_uM1JZrjkPtoQUORW4cZrI9njShYAArFUVvWvIdITXAKVtJVVZ9naigktLd9L88nLDgSAA6kaZqzkgzDuKIn98zwCqaDE9KFXbxZUcDfEsNRVpRbRqTz4d&key=YOUR_API_KEY'
@@ -119,7 +130,11 @@ var getGoogleSearch = function (search) {
     });
 };
 
+// function to parse the data retrieved from the Google API
 var displayGoogleBusinesses = function (data) {
+
+  barcardContainerEl.replaceChildren(); // clear out previous results
+
   if (data.results.length === 0) {
     barcardContainerEl.textContent = "No businesses found.";
     // Without a `return` statement, the rest of this function will continue to run and perhaps throw an error if `repos` is empty
@@ -127,17 +142,18 @@ var displayGoogleBusinesses = function (data) {
   }
 
   for (var i = 0; i < data.results.length; i++) {
-    // The result will be `<github-username>/<github-repository-name>`
-    var businessName = data.results[i].name;
 
-    console.log(businessName);
+    var businessname = data.results[i].name;
+    var barimage = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=" + data.results[i].photos[0].photo_reference + "&key=" + myapikeys.google;
+
+    // console.log(businessname);
 
     let newbarcard = barcard.cloneNode(true);
-    newbarcard.querySelector("div > figure > img").src = "./assets/images/wil-stewart-UErWoQEoMrc-unsplash.jpg";
-    newbarcard.querySelector("div > div > h2").textContent = businessName;
+    newbarcard.querySelector("div > figure > img").src = barimage;
+    newbarcard.querySelector("div > div > h2").textContent = businessname;
 
+    var categories = "";
     if (data.results[i].types.length > 0) {
-      let categories = "";
       for (var j = 0; j < data.results[i].types.length; j++) {
         categories += data.results[i].types[j] + " ";
         console.log(data.results[i].types[j]);
@@ -147,6 +163,12 @@ var displayGoogleBusinesses = function (data) {
     } else {
       newbarcard.querySelector("div > div > p").innerHTML =
         "<i class='fas fa-check-square status-icon icon-sunglasses'></i>";
+    }
+
+    barlist[i] = {
+      name: businessname,
+      type: categories,
+      image: barimage,
     }
 
     barcardContainerEl.appendChild(newbarcard);
