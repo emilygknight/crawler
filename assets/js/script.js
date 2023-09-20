@@ -88,6 +88,8 @@ function displayGooglePlace(data) {
   </div>
   */
 
+  document.getElementById("bar-card").replaceChildren(); // clear out bar-card
+
   var pickedBarCard = document.createElement("div");
   pickedBarCard.classList = "mockup-window border bg-base-300";
   var pickedBarCardContent = document.createElement("div");
