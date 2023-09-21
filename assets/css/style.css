@@ -15,11 +15,13 @@ text{
     width:400px;
     height:500px;
     top:0;
-    left:520px;
+    left:0;
 }
+
+/*
 #bar-card h1{
     font-size: 50px;
-    font-weight: bold;
+    font-weight: normal;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     position: absolute;
     padding: 0;
@@ -28,3 +30,4 @@ text{
     -webkit-transform:translate(0,-50%);
             transform:translate(0,-50%);
 }
+*/
