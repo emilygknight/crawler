@@ -16,7 +16,7 @@
     <header class="bg-gradient-to-r from-primary to-black m-1 rounded-lg w-[100%-5px]">
         <!-- style="background-image: url(https://daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg);" -->
         <div class="hero-overlay rounded-lg"></div>
-        <div class="text-right text-neutral-content p-5 w-4/5">
+        <div class="text-center text-neutral-content p-5">
             <h1 class="mb-1 text-5xl font-bold">Bar Crawler</h1>
         </div>
     </header>
@@ -27,19 +27,53 @@
         <!-- column 1 aside -->
         <aside class="flex-col w-1/3 max-w-[50%]">
 
+            <!-- weather forecast -->
+            <section
+                class="self-end gap-1 mb-1 rounded-2xl text-black bg-transparent leading-6 w-fit flex flex-row bg-gradient-to-b from-gray-50 to-transparent hover:bg-gray-50">
+                <div class="card card-side shadow-2xl">
+                    <figure id="todaysweathericon" class="opacity-80 min-w-[100px] text-6xl">☀️</figure>
+                    <div class="card-body">
+                        <h1 class="mb-5 text-xl font-bold" style="flex-shrink: 3">
+                            Tonight's Weather<span id="cityname"></span>
+                        </h1>
+                        <p class="mb-5 text-lg font-bold">
+                            <span id="todaysdate"></span>
+                        </p>
+                        <p class="">
+                            <span id="todaysweatherdescription" class="capitalize">forecast description</span>
+                        <p id="todaysweatherdata" class="">Temperature, Humidity</p>
+                        <div class="flex flex-row">
+                            <span class="arrowcontainer flex"><span id="winddirection"
+                                    class="text-3xl w-fit h-fit font-bold">⇧</span></span>
+                            <span id="todaysweatherspeed"> wind direction & speed</span>
+                        </div>
+                        </p>
+                    </div>
+                </div>
+            </section>
+
             <!-- map -->
+            <!--
             <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d304.52107673255756!2d-97.74119202402814!3d30.286582339128955!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8644b577df4246bd%3A0xb7177c1de304f7f6!2sTexas%20Union!5e0!3m2!1sen!2ssg!4v1694692207215!5m2!1sen!2ssg"
                 class="w-full" style="border:0;" allowfullscreen="" loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade"></iframe>
-
+            -->
             <!-- search section for cities -->
             <section class="form-control w-full">
                 <label class="label">
                     <span class="label-text w-full max-w-xs text-2xl">Search for:</span>
                 </label>
-                <input id="whattosearch" type="text" placeholder="Bars"
+                <input id="whattosearch" type="text" placeholder="Bar types" name="bartypes" list="bartypes"
                     class="input input-bordered w-full input-primary" />
+                <datalist id="bartypes">
+                    <option value="dive bar">
+                    <option value="tradam">
+                    <option value="cocktail bar">
+                    <option value="karaoke bar">
+                    <option value="restaurant bar">
+                    <option value="rooftop bar">
+                </datalist>
             </section>
 
             <button id="find-me" class="btn btn-primary" onclick="geoFindMe()">Find Me</button>
@@ -51,12 +85,17 @@
         <!-- column 2 - results column-->
         <div class="flex-col w-2/3">
 
-            <!-- Wheel -->
-            <div id="chart" class="min-w-full flex relative justify-center">
-                <div id="bar-card">
+            <div class="relative flex flex-col">
+                <!-- Selection result -->
+                <div id="bar-card" class="flex relative justify-center">
                     <h1></h1>
                 </div>
+
+                <!-- Wheel -->
+                <div id="chart" class="min-w-full flex relative justify-center">
+                </div>
             </div>
+
             <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
             <!-- required script placement for wheel-->
             <!-- end Wheel -->

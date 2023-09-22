@@ -1,9 +1,39 @@
+var storagekey = "barconfig"; // localStorage name to load/save config
 var barconfig = {
   latitude: 30.266666,
   longitude: -97.73333,
   radius: 5000,
   defaultsearchterm: "bar",
+  units: "imperial",
+  searchterm: "",
 };
+
+var unit_deg = {
+  standard: "°K",
+  metric: "°C",
+  imperial: "°F",
+};
+var unit_dist = {
+  standard: "m/s",
+  metric: "m/s",
+  imperial: "mph",
+};
+
+function configload() {
+  let newdata = {};
+  //console.log("loading from storage");
+  newdata = JSON.parse(localStorage.getItem(storagekey));
+  Object.assign(barconfig, newdata); // merge data from storage
+  return true;
+}
+
+function configsave() {
+  // Store data to localstorage
+  //console.log("saving to storage");
+  //console.log(this.pdata);
+  localStorage.setItem(storagekey, JSON.stringify(barconfig));
+  return true;
+}
 
 var barcardContainerEl = document.querySelector("#barcardcontainer");
 
@@ -38,6 +68,86 @@ function createElementFromHTML(htmlString) {
   return div.firstChild;
 }
 
+// Get weather from location
+//   api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}
+function getweather() {
+  //let forecast = JSON.parse(testforecast);
+
+  let apilink =
+    "https://api.openweathermap.org/data/2.5/weather?lat=" +
+    barconfig.latitude +
+    "&lon=" +
+    barconfig.longitude +
+    "&units=" +
+    barconfig.units +
+    "&appid=2baf085ed1bbea0d1b7d521e3687a9b9";
+
+  fetch(apilink)
+    .then(function (response) {
+      if (response.ok) {
+        console.log("content for weather openweatherapi response :", response);
+        response.json().then(function (data) {
+          console.log("json content for weather openweatherapi call: ", data);
+          console.log(data);
+          document.getElementById("cityname").textContent = " in " + data.name;
+
+          displayweather(data);
+          return;
+          // end parse openweathermap API response */
+        });
+      } else {
+        alert("Error: " + response.statusText);
+      }
+    })
+    .catch(function (error) {
+      console.log("Error:", error);
+    });
+
+  function displayweather(weather) {
+    let ticon = weather.weather[0].icon;
+    let w_isday = ticon.charAt(ticon.length - 1) === "d"; // is it day or night?
+    let wicon = "https://openweathermap.org/img/wn/" + ticon + "@2x.png";
+
+    console.log("today's weather:", weather);
+    // transform: rotate(45deg);
+
+    if (w_isday) {
+      document.getElementById("todaysweathericon").classList.add("bg-cyan-200");
+      document.getElementById("todaysweathericon").classList.remove("bg-black");
+    } else {
+      document.getElementById("todaysweathericon").classList.add("bg-black");
+      document.getElementById("todaysweathericon").classList.remove("bg-cyan-200");
+    }
+    document.getElementById("todaysweathericon").innerHTML = '<img src="' + wicon + '" />';
+    document.getElementById("todaysweatherdescription").innerHTML = weather.weather[0].description;
+    document.getElementById("todaysweatherdata").innerHTML =
+      "🌡 " +
+      weather.main.temp +
+      unit_deg[barconfig.units] +
+      " (feels like " +
+      weather.main.temp +
+      unit_deg[barconfig.units] +
+      ")<br>🌢 " +
+      weather.main.humidity +
+      "% humidity<br>";
+
+    document.getElementById("winddirection").style.transform = "rotate(" + weather.wind.deg + "deg)";
+
+    var weatherspeed =
+      "<p>⠀" +
+      weather.wind.speed +
+      " " +
+      unit_dist[barconfig.units] +
+      " (wind) " +
+      weather.wind.gust +
+      " " +
+      unit_dist[barconfig.units] +
+      " (gust)</p>";
+    console.log(weatherspeed);
+    document.getElementById("todaysweatherspeed").innerHTML = weatherspeed;
+  }
+}
+
 // Get current position of the user from browser
 function geoFindMe() {
   const status = document.querySelector("#status");
@@ -59,11 +169,15 @@ function geoFindMe() {
     barconfig.latitude = latitude;
     barconfig.longitude = longitude;
 
+    getweather();
+
     // Search from the default search term
     var searchterm = document.getElementById("whattosearch").value.trim();
     if (searchterm.length === 0) {
       searchterm = barconfig.defaultsearchterm;
     }
+    barconfig.searchterm = searchterm;
+    configsave();
     getGoogleSearch(searchterm);
   }
 
@@ -117,7 +231,8 @@ function displayGooglePlace(data) {
     pwebsite = '<p>Website: <a href="' + data.result.website + '">' + data.result.website + "</a></p>";
   }
 
-  pickedBarCardContent.innerHTML = '<h1 class="text-2xl">' + pname + "</h1><p>" + paddr + "<br>" + psummary + "</p><br>" + pwebsite;
+  pickedBarCardContent.innerHTML =
+    '<h1 class="text-2xl">' + pname + "</h1><p>" + paddr + "<br>" + psummary + "</p><br>" + pwebsite;
 
   pickedBarCard.appendChild(pickedBarCardContent);
   document.getElementById("bar-card").appendChild(pickedBarCard);
@@ -266,6 +381,7 @@ var displayGoogleBusinesses = function (data) {
     }
     barcardContainerEl.appendChild(newbarcard);
   }
+  // document.getElementById("chart").replaceChildren();
   displayWheel(wheeldata);
 };
 
@@ -428,3 +544,9 @@ function displayWheel(data) {
     .text("SPIN")
     .style({ "font-weight": "bold", "font-size": "30px" });
 }
+
+// main start of javascript code after this is loaded
+configload();
+// if (barconfig.searchterm.length > 0) {
+//  getGoogleSearch(barconfig.searchterm);
+//}
