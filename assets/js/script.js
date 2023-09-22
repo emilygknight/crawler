@@ -547,6 +547,6 @@ function displayWheel(data) {
 
 // main start of javascript code after this is loaded
 configload();
-if (barconfig.searchterm.length > 0) {
-  getGoogleSearch(barconfig.searchterm);
-}
+// if (barconfig.searchterm.length > 0) {
+//  getGoogleSearch(barconfig.searchterm);
+//}
