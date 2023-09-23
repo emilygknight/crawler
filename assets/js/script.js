@@ -39,14 +39,20 @@ var barcardContainerEl = document.querySelector("#barcardcontainer");
 
 var barcard = createElementFromHTML(
   `
-      <div class="card bg-base-100 shadow-xl">
-        <figure><img src="./assets/images/wil-stewart-UErWoQEoMrc-unsplash.jpg" alt="Drinks" /></figure>
-        <div class="card-body">
-          <h2 class="card-title">Drinks!</h2>
-          <p>Find your drink!</p>
-        </div>
-      </div>
-    `
+  <div class="card bg-gray-100 shadow-xl">
+    <figure class="h-1/2 max-h-[50%]">
+      <img
+        src="./assets/images/wil-stewart-UErWoQEoMrc-unsplash.jpg"
+        alt="Drinks"
+        class="h-full w-full object-center object-cover"
+      />
+    </figure>
+    <div class="card-body h-fit p-5">
+      <h2 class="card-title">Drinks!</h2>
+      <p>Find your drink!</p>
+    </div>
+  </div>
+  `
 );
 
 var barlist = [];
@@ -73,6 +79,7 @@ function createElementFromHTML(htmlString) {
 function getweather() {
   //let forecast = JSON.parse(testforecast);
 
+  /* current weather
   let apilink =
     "https://api.openweathermap.org/data/2.5/weather?lat=" +
     barconfig.latitude +
@@ -81,6 +88,18 @@ function getweather() {
     "&units=" +
     barconfig.units +
     "&appid=2baf085ed1bbea0d1b7d521e3687a9b9";
+  */
+
+  // forecast of tonight's weather
+  let apilink =
+    "https://api.openweathermap.org/data/2.5/forecast?lat=" +
+    barconfig.latitude +
+    "&lon=" +
+    barconfig.longitude +
+    "&units=" +
+    barconfig.units +
+    "&appid=" +
+    myapikeys.openweather;
 
   fetch(apilink)
     .then(function (response) {
@@ -88,7 +107,9 @@ function getweather() {
         // console.log("content for weather openweatherapi response :", response);
         response.json().then(function (data) {
           // console.log("json content for weather openweatherapi call: ", data);
-          document.getElementById("cityname").textContent = " in " + data.name;
+          document.getElementById("cityname").textContent = " in " + data.city.name; // data.name for current weather
+          barconfig.cityname = data.city.name; // set it as the default city name
+          configsave();
 
           displayweather(data);
           return;
@@ -103,47 +124,54 @@ function getweather() {
     });
 
   function displayweather(weather) {
-    let ticon = weather.weather[0].icon;
-    let w_isday = ticon.charAt(ticon.length - 1) === "d"; // is it day or night?
+    var i = 0;
+    var itemdate = new Date();
+    var maxiteration = Math.min(weather.list.length, 9); // 8 3-hour intervals in the future
+    if (itemdate.getHours() < 6) {
+      // it's still considered tonight before 6 AM
+      maxiteration = 1;
+    }
+    for (i = 0; i < maxiteration; i++) {
+      itemdate = new Date(0);
+      itemdate.setUTCSeconds(parseInt(weather.list[i].dt));
+      w_isnight = itemdate.getHours() >= 18 || itemdate.getHours() < 6; // it's night after 6PM to 6AM
+      // console.log(itemdate.getHours());
+      if (w_isnight) {
+        // tonight should be after 6pm or dark (assume local browser time)
+        break;
+      }
+    }
+
+    let ticon = weather.list[i].weather[0].icon;
     let wicon = "https://openweathermap.org/img/wn/" + ticon + "@2x.png";
 
-    console.log("today's weather:", weather);
+    //console.log("tonight's weather:", weather);
     // transform: rotate(45deg);
+    document.getElementById("tonightshour").textContent = itemdate.toLocaleTimeString("en-US");
 
-    if (w_isday) {
-      document.getElementById("todaysweathericon").classList.add("bg-cyan-200");
-      document.getElementById("todaysweathericon").classList.remove("bg-black");
-    } else {
-      document.getElementById("todaysweathericon").classList.add("bg-black");
-      document.getElementById("todaysweathericon").classList.remove("bg-cyan-200");
-    }
-    document.getElementById("todaysweathericon").innerHTML = '<img src="' + wicon + '" />';
-    document.getElementById("todaysweatherdescription").innerHTML = weather.weather[0].description;
+    document.getElementById("todaysweathericon").classList.add("bg-black");
+    document.getElementById("todaysweathericon").innerHTML = '<img src="' + wicon + '" class="w-[100px] h-[100px]"/>';
+    document.getElementById("todaysweatherdescription").innerHTML = weather.list[i].weather[0].description;
     document.getElementById("todaysweatherdata").innerHTML =
       "🌡 " +
-      weather.main.temp +
+      weather.list[i].main.temp +
       unit_deg[barconfig.units] +
       " (feels like " +
-      weather.main.temp +
+      weather.list[i].main.temp +
       unit_deg[barconfig.units] +
       ")<br>🌢 " +
-      weather.main.humidity +
+      weather.list[i].main.humidity +
       "% humidity<br>";
 
-    document.getElementById("winddirection").style.transform = "rotate(" + weather.wind.deg + "deg)";
+    document.getElementById("winddirection").style.transform = "rotate(" + weather.list[i].wind.deg + "deg)";
 
     var windgust = "";
-    if (weather.wind.gust) { // check if defined
+    if (weather.list[i].wind.gust) {
+      // check if defined
       windgust = " " + unit_dist[barconfig.units] + " (gust)";
     }
     var weatherspeed =
-      "<p>⠀" +
-      weather.wind.speed +
-      " " +
-      unit_dist[barconfig.units] +
-      " (wind) " +
-      windgust +
-      "</p>";
+      "<p>⠀" + weather.list[i].wind.speed + " " + unit_dist[barconfig.units] + " (wind) " + windgust + "</p>";
     // console.log(weatherspeed);
     document.getElementById("todaysweatherspeed").innerHTML = weatherspeed;
   }
@@ -202,7 +230,7 @@ function displayGooglePlace(data) {
     <div class="flex justify-center px-4 py-16 bg-base-200">Hello!</div>
   </div>
   */
-
+  console.log(data);
   document.getElementById("bar-card").replaceChildren(); // clear out bar-card
 
   var pickedBarCard = document.createElement("div");
@@ -214,8 +242,12 @@ function displayGooglePlace(data) {
 
   var pname = "";
   var paddr = "";
+  var pprice = "";
+  var prating = "";
   var psummary = "";
   var pwebsite = "";
+  var pbadges = '<div class="flex flex-row py-1">';
+  var pbadgesdiv = '<div class="badge badge-neutral">';
 
   if ("name" in data.result) {
     pname = data.result.name;
@@ -223,17 +255,87 @@ function displayGooglePlace(data) {
   if ("formatted_address" in data.result) {
     paddr = data.result.formatted_address;
   }
+  if ("formatted_phone_number" in data.result) {
+    paddr += " ☏ " + data.result.formatted_phone_number;
+  }
+  if ("price_level" in data.result) {
+    for (var l = 0; l < Math.floor(parseInt(data.result.price_level)); l++) {
+      pprice += "$";
+    }
+  }
+  if ("rating" in data.result) {
+    prating +=
+      '<div class="flex flex-row"><p class="pr-1">rating: ' +
+      data.result.rating +
+      '<p><progress class="progress w-56" value="' +
+      parseFloat(data.result.rating) * 10 +
+      '" max="50"></progress></div>';
+  }
   if ("editorial_summary" in data.result) {
     if ("overview" in data.result.editorial_summary) {
       psummary = data.result.editorial_summary.overview;
     }
   }
+  if ("open_now" in data.result) {
+    if (data.result.open_now) {
+      pbadges += pbadgesdiv + "open now</div>";
+    }
+  }
+  if ("delivery" in data.result) {
+    if (data.result.delivery) {
+      pbadges += pbadgesdiv + "delivery</div>";
+    }
+  }
+  if ("dine_in" in data.result) {
+    if (data.result.dine_in) {
+      pbadges += pbadgesdiv + "dine in</div>";
+    }
+  }
+  if ("reservable" in data.result) {
+    if (data.result.reservable) {
+      pbadges += pbadgesdiv + "reservable</div>";
+    }
+  }
+  if ("serves_beer" in data.result) {
+    if (data.result.serves_beer) {
+      pbadges += pbadgesdiv + "beer</div>";
+    }
+  }
+  if ("serves_wine" in data.result) {
+    if (data.result.serves_beer) {
+      pbadges += pbadgesdiv + "wine</div>";
+    }
+  }
+  if ("takeout" in data.result) {
+    if (data.result.takeout) {
+      pbadges += pbadgesdiv + "takeout</div>";
+    }
+  }
+  if ("wheelchair_accessible_entrance" in data.result) {
+    if (data.result.wheelchair_accessible_entrance) {
+      pbadges += pbadgesdiv + "wheelchair</div>";
+    }
+  }
+  pbadges += "</div>";
   if ("website" in data.result) {
     pwebsite = '<p>Website: <a href="' + data.result.website + '">' + data.result.website + "</a></p>";
   }
 
   pickedBarCardContent.innerHTML =
-    '<h1 class="text-2xl">' + pname + "</h1><p>" + paddr + "<br>" + psummary + "</p><br>" + pwebsite;
+    '<h1 class="text-2xl">' +
+    pname +
+    "</h1><p>" +
+    paddr +
+    "<br>" +
+    pprice +
+    "<br>" +
+    prating +
+    "<br>" +
+    psummary +
+    "</p>" +
+    pbadges +
+    "<br>" +
+    pwebsite;
 
   pickedBarCard.appendChild(pickedBarCardContent);
   document.getElementById("bar-card").appendChild(pickedBarCard);
@@ -304,6 +406,7 @@ var getGoogleSearch = function (search) {
     myapikeys.google;
 
   // console.log("will fetch ", apiUrl);
+  searchmap(search);
 
   fetch(apiUrl, {
     method: "GET", // POST, PUT, DELETE, etc.
@@ -385,7 +488,7 @@ var displayGoogleBusinesses = function (data) {
     if (i < 10) {
       // put the first 10 search items in the wheel
       wheeldata[i] = {
-        label: businessname.slice(0, 38), // Display first 39 characters for wheel
+        label: businessname.slice(0, 35), // Display first 39 characters for wheel
         value: i + 1,
         barCard: data.results[i].place_id,
       };
@@ -395,6 +498,40 @@ var displayGoogleBusinesses = function (data) {
   document.getElementById("chart").replaceChildren();
   displayWheel(wheeldata);
 };
+
+// Reposition the map to locally configured latitude, longitude
+function centermap() {
+  // Documentation for Google Map Embed API:
+  // https://developers.google.com/maps/documentation/embed/embedding-map
+  var maplink =
+    "https://www.google.com/maps/embed/v1/place?key=" +
+    myapikeys.google +
+    "&center=" +
+    barconfig.latitude +
+    "," +
+    barconfig.longitude +
+    "&zoom=12&q=" +
+    barconfig.cityname;
+  //console.log("Centering map to: ", maplink);
+  document.getElementById("mainmap").setAttribute("src", maplink);
+}
+
+// Display map with search pins
+function searchmap(keywords) {
+  // Documentation for Google Map Embed API:
+  // https://developers.google.com/maps/documentation/embed/embedding-map
+  var maplink =
+    "https://www.google.com/maps/embed/v1/search?key=" +
+    myapikeys.google +
+    "&center=" +
+    barconfig.latitude +
+    "," +
+    barconfig.longitude +
+    "&zoom=12&q=" +
+    keywords;
+  //console.log("Centering map to: ", maplink);
+  document.getElementById("mainmap").setAttribute("src", maplink);
+}
 
 //Code for the wheel
 
@@ -582,7 +719,8 @@ for (var i = 0; i < drawers.length; i++) {
 
 // main() start of javascript code after this is loaded
 configload();
-if (barconfig.latitude && barconfig.longitude) { // get weather on start screen
+if (barconfig.latitude && barconfig.longitude) {
+  // get weather on start screen
   getweather();
 }
 // if (barconfig.searchterm.length > 0) {
