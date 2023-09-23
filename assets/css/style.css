@@ -1,15 +1,41 @@
-text{
-    font-family:Helvetica, Arial, sans-serif;
-    font-size:11px;
-    pointer-events:none;
+text {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 11px;
+  pointer-events: none;
 }
-#chart{
-    position:flex;
-    width:500px;
-    height:500px;
-    top:0;
-    left:0;
+#chart {
+  position: flex;
+  width: 500px;
+  height: 500px;
+  top: 0;
+  left: 0;
 }
+
+/* Drawer down class. Button is used to open and close the drawer */
+.drawerdown {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active,
+.drawerdown:hover {
+  background-color: #ccc;
+}
+
+/* Drawer content */
+.drawercontent {
+  max-height: 0;
+  overflow: hidden; /* collapsible content. Note: hidden by default */
+  transition: max-height 0.2s ease-out;
+}
+
 /* #bar-card{
     position: absolute;
     width:400px;

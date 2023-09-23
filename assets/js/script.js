@@ -39,7 +39,7 @@ var barcardContainerEl = document.querySelector("#barcardcontainer");
 
 var barcard = createElementFromHTML(
   `
-      <div class="card w-1/5 bg-base-100 shadow-xl">
+      <div class="card bg-base-100 shadow-xl">
         <figure><img src="./assets/images/wil-stewart-UErWoQEoMrc-unsplash.jpg" alt="Drinks" /></figure>
         <div class="card-body">
           <h2 class="card-title">Drinks!</h2>
@@ -85,10 +85,9 @@ function getweather() {
   fetch(apilink)
     .then(function (response) {
       if (response.ok) {
-        console.log("content for weather openweatherapi response :", response);
+        // console.log("content for weather openweatherapi response :", response);
         response.json().then(function (data) {
-          console.log("json content for weather openweatherapi call: ", data);
-          console.log(data);
+          // console.log("json content for weather openweatherapi call: ", data);
           document.getElementById("cityname").textContent = " in " + data.name;
 
           displayweather(data);
@@ -133,17 +132,19 @@ function getweather() {
 
     document.getElementById("winddirection").style.transform = "rotate(" + weather.wind.deg + "deg)";
 
+    var windgust = "";
+    if (weather.wind.gust) { // check if defined
+      windgust = " " + unit_dist[barconfig.units] + " (gust)";
+    }
     var weatherspeed =
       "<p>⠀" +
       weather.wind.speed +
       " " +
       unit_dist[barconfig.units] +
       " (wind) " +
-      weather.wind.gust +
-      " " +
-      unit_dist[barconfig.units] +
-      " (gust)</p>";
-    console.log(weatherspeed);
+      windgust +
+      "</p>";
+    // console.log(weatherspeed);
     document.getElementById("todaysweatherspeed").innerHTML = weatherspeed;
   }
 }
@@ -197,7 +198,7 @@ function geoFindMe() {
 //
 function displayGooglePlace(data) {
   /* Add DaisyUI window element
-  <div class="mockup-window border bg-base-300">
+  <div class="mockup-window bg-base-300 rounded-b-none">
     <div class="flex justify-center px-4 py-16 bg-base-200">Hello!</div>
   </div>
   */
@@ -205,11 +206,11 @@ function displayGooglePlace(data) {
   document.getElementById("bar-card").replaceChildren(); // clear out bar-card
 
   var pickedBarCard = document.createElement("div");
-  pickedBarCard.classList = "mockup-window border bg-base-300";
+  pickedBarCard.classList = "mockup-window bg-gray-300 rounded-b-none";
   var pickedBarCardContent = document.createElement("div");
-  pickedBarCardContent.classList = "flex flex-col flex-start px-4 py-16 bg-base-200";
+  pickedBarCardContent.classList = "flex flex-col flex-start px-4 py-16 bg-gray-100";
   //pickedBarCardContent.innerHTML = '<p>' + data.result.editorial_summary.overview + '</p><br><p><a href="' + data.result.website + '">' + data.result.website + '"</a></p>';
-  console.log(data);
+  //console.log(data);
 
   var pname = "";
   var paddr = "";
@@ -236,6 +237,9 @@ function displayGooglePlace(data) {
 
   pickedBarCard.appendChild(pickedBarCardContent);
   document.getElementById("bar-card").appendChild(pickedBarCard);
+
+  // open drawer to display results
+  opendrawer("searchresultdrawer");
 }
 
 // Get the place details from ther Googple Place API
@@ -249,7 +253,7 @@ var getGooglePlace = function (placeref) {
     "&key=" +
     myapikeys.google;
 
-  console.log("will fetch details of venue", apiUrl);
+  //console.log("will fetch details of venue", apiUrl);
 
   fetch(apiUrl, {
     method: "GET", // POST, PUT, DELETE, etc.
@@ -261,9 +265,9 @@ var getGooglePlace = function (placeref) {
   })
     .then(function (response) {
       if (response.ok) {
-        console.log(response);
+        // console.log(response);
         response.json().then(function (data) {
-          console.log(data);
+          // console.log(data);
           displayGooglePlace(data);
         });
       } else {
@@ -299,7 +303,7 @@ var getGoogleSearch = function (search) {
     "&key=" +
     myapikeys.google;
 
-  console.log("will fetch ", apiUrl);
+  // console.log("will fetch ", apiUrl);
 
   fetch(apiUrl, {
     method: "GET", // POST, PUT, DELETE, etc.
@@ -311,9 +315,9 @@ var getGoogleSearch = function (search) {
   })
     .then(function (response) {
       if (response.ok) {
-        console.log(response);
+        // console.log(response);
         response.json().then(function (data) {
-          console.log(data);
+          // console.log(data);
           displayGoogleBusinesses(data);
         });
       } else {
@@ -327,7 +331,7 @@ var getGoogleSearch = function (search) {
 
 // function to parse the data retrieved from the Google API
 var displayGoogleBusinesses = function (data) {
-  var wheeldata = [];
+  var wheeldata = []; // clear out wheel data
 
   barcardContainerEl.replaceChildren(); // clear out previous results
 
@@ -337,18 +341,23 @@ var displayGoogleBusinesses = function (data) {
     return;
   }
 
-  wheeldata = [];
+  var excludedcategories = ["point_of_interest", "establishment"]; // don't display these categories
 
   for (var i = 0; i < data.results.length; i++) {
     var businessname = data.results[i].name;
-    var barimage =
-      "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=" +
-      data.results[i].photos[0].photo_reference +
-      "&key=" +
-      myapikeys.google;
+    var barimage = "";
+    if (data.results[i].photos) {
+      // Sometimes there is no photos
+      barimage =
+        "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=" +
+        data.results[i].photos[0].photo_reference +
+        "&key=" +
+        myapikeys.google;
+    } else {
+      barimage = data.results[i].icon;
+    }
 
     // console.log(businessname);
-
     let newbarcard = barcard.cloneNode(true);
     newbarcard.querySelector("div > figure > img").src = barimage;
     newbarcard.querySelector("div > div > h2").textContent = businessname;
@@ -356,14 +365,15 @@ var displayGoogleBusinesses = function (data) {
     var categories = "";
     if (data.results[i].types.length > 0) {
       for (var j = 0; j < data.results[i].types.length; j++) {
-        categories += data.results[i].types[j] + " ";
-        console.log(data.results[i].types[j]);
+        var categoryitem = data.results[i].types[j];
+        if (!excludedcategories.includes(categoryitem)) {
+          categories += '<div class="badge">' + data.results[i].types[j] + "</div>"; // ○ tailwind badge for categories
+          // console.log(data.results[i].types[j]);
+        }
       }
-      newbarcard.querySelector("div > div > p").innerHTML =
-        "<i class='fas fa-times status-icon icon-sunglasses'></i>" + categories;
+      newbarcard.querySelector("div > div > p").innerHTML = categories; // not using fontawesome: "<i class='fas fa-times status-icon icon-sunglasses'></i>"
     } else {
-      newbarcard.querySelector("div > div > p").innerHTML =
-        "<i class='fas fa-check-square status-icon icon-sunglasses'></i>";
+      newbarcard.querySelector("div > div > p").innerHTML = ""; // "<i class='fas fa-check-square status-icon icon-sunglasses'></i>";
     }
 
     barlist[i] = {
@@ -373,21 +383,22 @@ var displayGoogleBusinesses = function (data) {
     };
 
     if (i < 10) {
+      // put the first 10 search items in the wheel
       wheeldata[i] = {
-        label: businessname,
+        label: businessname.slice(0, 38), // Display first 39 characters for wheel
         value: i + 1,
         barCard: data.results[i].place_id,
       };
     }
     barcardContainerEl.appendChild(newbarcard);
   }
-  // document.getElementById("chart").replaceChildren();
+  document.getElementById("chart").replaceChildren();
   displayWheel(wheeldata);
 };
 
 //Code for the wheel
 
-/*
+/* Example data array for wheel:
 var data = [
   { label: "Dell LAPTOP", value: 1, barCard: "Bar Info" }, // padding
   { label: "IMAC PRO", value: 2, barCard: "Bar nfo" }, //font-family
@@ -426,7 +437,7 @@ function displayWheel(data) {
     var scale = d3.scale.linear().range([360, 1440]).domain([0, 100000]);
     if (window.hasOwnProperty("crypto") && typeof window.crypto.getRandomValues === "function") {
       window.crypto.getRandomValues(array);
-      console.log("works");
+      // console.log("works");
     } else {
       //no support for crypto, get crappy random numbers
       for (var i = 0; i < 1000; i++) {
@@ -484,9 +495,9 @@ function displayWheel(data) {
   function spin(d) {
     container.on("click", null);
     //all slices have been seen, all done
-    console.log("OldPick: " + oldpick.length, "Data length: " + data.length);
+    //console.log("OldPick: " + oldpick.length, "Data length: " + data.length);
     if (oldpick.length == data.length) {
-      console.log("done");
+      //console.log("done");
       container.on("click", null);
       return;
     }
@@ -520,7 +531,7 @@ function displayWheel(data) {
         getGooglePlace(data[picked].barCard);
 
         /* Get the result value from object "data" */
-        console.log(data[picked].value);
+        //console.log(data[picked].value);
 
         /* Comment the below line for restrict spin to sngle time */
         container.on("click", spin);
@@ -545,8 +556,35 @@ function displayWheel(data) {
     .style({ "font-weight": "bold", "font-size": "30px" });
 }
 
-// main start of javascript code after this is loaded
+// Drawer down event listeners
+// Modified from https://www.w3schools.com/howto/howto_js_collapsible.asp
+var drawers = document.getElementsByClassName("drawerdown");
+
+function opendrawer(elementId) {
+  var thisdrawer = document.getElementById(elementId);
+  thisdrawer.classList.add("draweropen");
+  var content = thisdrawer.previousElementSibling;
+  content.style.maxHeight = content.scrollHeight + "px";
+}
+
+for (var i = 0; i < drawers.length; i++) {
+  drawers[i].addEventListener("click", function (event) {
+    event.preventDefault();
+    event.target.classList.toggle("draweropen");
+    var content = event.target.previousElementSibling;
+    if (content.style.maxHeight) {
+      content.style.maxHeight = null;
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+    }
+  });
+}
+
+// main() start of javascript code after this is loaded
 configload();
+if (barconfig.latitude && barconfig.longitude) { // get weather on start screen
+  getweather();
+}
 // if (barconfig.searchterm.length > 0) {
 //  getGoogleSearch(barconfig.searchterm);
 //}
