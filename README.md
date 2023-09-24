@@ -1,5 +1,7 @@
 # Bar Crawler
 
+![Bar Crawler](assets/images/img1.png)
+
 ## Description
 
 This is a web application that allows users to easily create their own personalized bar crawl so they get to focus on having fun. The application uses the Google Places API to search for bars where they are then displayed on on a wheel that spins. The OpenWeather API is used to display the local weather so the user is prepared for their night out.
