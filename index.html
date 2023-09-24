@@ -7,6 +7,7 @@
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.4/dist/full.css" rel="stylesheet" type="text/css" />
     <link href="./assets/css/style.css" rel="stylesheet" type="text/css" />
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <title>Bar Crawler</title>
 </head>
 
@@ -17,7 +18,8 @@
         <!-- style="background-image: url(https://daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg);" -->
         <div class="hero-overlay rounded-lg"></div>
         <div class="text-center text-neutral-content p-5">
-            <h1 class="mb-1 text-5xl font-bold">Bar Crawler</h1>
+            <h1 class="mb-1 text-5xl font-bold capitalize"><span id="crawlertext" class="capitalize">Bar</span> Crawler
+            </h1>
         </div>
     </header>
 
@@ -33,11 +35,11 @@
                     <figure id="todaysweathericon"
                         class="opacity-80 min-w-[100px] text-6xl md:max-lg:rounded-b-none md:max-lg:rounded-t-xl">☀️
                     </figure>
-                    <div class="card-body bg-gradient-to-b from-gray-50 to-transparent hover:bg-gray-50">
-                        <h1 class="mb-5 text-xl font-bold" style="flex-shrink: 3">
+                    <div class="card-body bg-gradient-to-b from-gray-50 to-transparent hover:bg-gray-50 py-3">
+                        <h1 class="text-xl font-bold" style="flex-shrink: 3">
                             Tonight's Weather<span id="cityname"></span>
                         </h1>
-                        <p class="mb-5 text-lg font-bold">
+                        <p class="text-lg font-bold">
                             <span id="tonightshour">none</span>
                         </p>
                         <p class="">
@@ -55,40 +57,71 @@
 
             <!-- search section for cities -->
             <section class="form-control w-full">
-                <label class="label">
+                <!-- <label class="label">
                     <span class="label-text w-full max-w-xs text-2xl">Search for:</span>
-                </label>
+                </label> -->
                 <input id="whattosearch" type="text" placeholder="Bar types" name="bartypes" list="bartypes"
                     class="input input-bordered w-full input-primary" />
                 <datalist id="bartypes">
-                    <option value="dive bar">
-                    <option value="tradam">
-                    <option value="cocktail bar">
-                    <option value="karaoke bar">
-                    <option value="restaurant bar">
-                    <option value="rooftop bar">
+                    <option value="Cocktail Bar">
+                    <option value="Country Bar">
+                    <option value="Dive Bar">
+                    <option value="Karaoke Bar">
+                    <option value="Nightclub">
+                    <option value="Restaurant Bar">
+                    <option value="Rooftop Bar">
                 </datalist>
             </section>
 
-            <button id="find-me" class="btn btn-primary" onclick="geoFindMe()">Find Me</button>
+            <div class="grid grid-cols-2 my-1 gap-1">
+                <button id="find-me" class="btn btn-primary" onclick="geoFindMe()">Search My Location</button>
+                <button id="find-map" class="btn btn-primary" onclick="geoFindMap()">Search Map Location</button>
+            </div>
             <p id="status"></p>
             <a id="map-link" target="_blank"></a>
 
-            <!-- map -->
-            <!-- without API
+<!--             <input id="searchTextField" type="text" placeholder="Search the map"
+                class="input input-bordered w-full input-primary mb-1">
+ -->
+            <!-- four styles of google maps, we will use the last one (javascript API) -->
+            <!-- google maps without API
             <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d304.52107673255756!2d-97.74119202402814!3d30.286582339128955!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8644b577df4246bd%3A0xb7177c1de304f7f6!2sTexas%20Union!5e0!3m2!1sen!2ssg!4v1694692207215!5m2!1sen!2ssg"
                 class="w-full" style="border:0;" allowfullscreen="" loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade"></iframe>
             -->
-            <iframe id="mainmap" class="w-full h-64 rounded-2xl bg-opacity-50 opacity-80 hover:opacity-100"
+            <!-- google maps embed API  -->
+            <!-- <iframe id="mainmap" class="w-full h-64 rounded-2xl bg-opacity-50 opacity-80 hover:opacity-100"
                 style="border: 0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
                 src="https://www.google.com/maps/embed/v1/place?q=Singapore&key=AIzaSyDAKGh9hM6lkhtz5MNmuUehgwnvtLVjYr8&center=1.2985181,103.8332306&zoom=14"></iframe>
+            -->
+            <!-- google maps web components documentation:  https://developers.google.com/maps/documentation/javascript/web-components/overview#html_2
+            <div id="selectmap" class="w-full h-[150px]">
+                <gmp-map center="37.4220656,-122.0840897" zoom="10" map-id="DEMO_MAP_ID"></gmp-map>
+            </div>
+            -->
+            <!--The div element for the map 
+                google maps Javascript API: https://developers.google.com/maps/documentation/javascript/adding-a-google-map
+            -->
+            <div id="map" class="w-full h-64 rounded-2xl w-full h-96 shadow-2xl "></div>
+
+            <ul id="selectedplaces" class="menu bg-base-200 w-full rounded-box my-1">
+                <!--
+                <li><a>Item 1</a></li>
+                <li><a>Item 2</a></li>
+                <li><a>Item 3</a></li>
+                -->
+            </ul>
+
+            <div class="grid grid-cols-2 my-1 gap-1">
+                <button id="createcrawl" class="btn btn-primary" onclick="createcrawl()">Create your Crawl</button>
+            </div>
 
         </aside>
 
         <!-- column 2 - results column-->
-        <div class="flex-col w-2/3 max-md:w-full max-md:max-w-full max-md:min-w-full">
+        <div
+            class="flex-col w-2/3 max-md:w-full max-md:max-w-full max-md:min-w-full md:max-h-[960px] md:overflow-scroll md:overscroll-y-contain">
 
             <div class="relative flex flex-col">
                 <!-- Selection result -->
@@ -126,8 +159,21 @@
     </main>
 </body>
 
-<script src="https://cdn.tailwindcss.com"></script>
 <script src="./assets/js/config.js"></script>
+<!-- google libraries bootstrap loader -->
+<!-- <script>
+    (g => { var h, a, k, p = "The Google Maps JavaScript API", c = "google", l = "importLibrary", q = "__ib__", m = document, b = window; b = b[c] || (b[c] = {}); var d = b.maps || (b.maps = {}), r = new Set, e = new URLSearchParams, u = () => h || (h = new Promise(async (f, n) => { await (a = m.createElement("script")); e.set("libraries", [...r] + ""); for (k in g) e.set(k.replace(/[A-Z]/g, t => "_" + t[0].toLowerCase()), g[k]); e.set("callback", c + ".maps." + q); a.src = `https://maps.${c}apis.com/maps/api/js?` + e; d[q] = f; a.onerror = () => h = n(Error(p + " could not load.")); a.nonce = m.querySelector("script[nonce]")?.nonce || ""; m.head.append(a) })); d[l] ? console.warn(p + " only loads once. Ignoring:", g) : d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n)) })({
+        key: myapikeys.google,
+        v: "weekly",
+        // Use the 'v' parameter to indicate the version to use (weekly, beta, alpha, etc.).
+        // Add other bootstrap parameters as needed, using camel case.
+    });
+</script> -->
+<script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAKGh9hM6lkhtz5MNmuUehgwnvtLVjYr8&callback=initMap&libraries=maps,marker,places&v=beta">
+    </script>
+
+<script src="https://cdn.tailwindcss.com"></script>
 <script src="./assets/js/script.js"></script>
 
 </html>
