@@ -96,7 +96,7 @@ var barcard = createElementFromHTML(
 
 var barlist = [];
 
-/*
+/* example object
 var barlist = [
   {
     business_status: "OPERATIONAL",
@@ -259,6 +259,46 @@ function getweather() {
   }
 }
 
+// Get unsplash image on background
+function get_image(searchterm) {
+  let apilink =
+    "https://api.unsplash.com/photos/random?query=" +
+    searchterm + // unsafe, need to sanitize
+    "&orientation=landscape&count=1&per_page=1&client_id=" +
+    myapikeys.unsplash;
+
+  fetch(apilink)
+    .then(function (response) {
+      if (response.ok) {
+        // console.log(response);
+        response.json().then(function (data) {
+          //console.log(data);
+
+          // Teleport
+          //console.log("image is at: " + data.photos[0].image.web);
+          //document.getElementById("todaysdash").style.backgroundImage = 'url("' + data.photos[0].image.web + '")';
+
+          // unsplash
+          console.log("unsplash background image is at: " + data[0].urls.full + "&w=" + window.innerWidth);
+
+          var stylestring =
+            'background: linear-gradient(rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.9)), url("' +
+            data[0].urls.full +
+            "&w=" +
+            window.innerWidth +
+            '");';
+          //document.getElementById("mainscreen").style.backgroundImage =
+          document.getElementById("mainscreen").setAttribute("style", stylestring);
+        });
+      } else {
+        modalalert("Error: " + response.statusText, "get_image(" + apilink + ")");
+      }
+    })
+    .catch(function (error) {
+      modalalert("Error:" + error, "get_image(" + apilink + ")");
+    });
+}
+
 // Get current position of the user from browser
 function geoFindMe() {
   const status = document.querySelector("#status");
@@ -286,7 +326,7 @@ function geoFindMe() {
     getweather();
 
     // Search from the default search term
-    var searchterm = document.getElementById("whattosearch").value.trim();
+    var searchterm = document.getElementById("whattosearch").value.trim(); // need to sanitize appropriately
     if (searchterm.length === 0) {
       searchterm = barconfig.defaultsearchterm;
     }
@@ -394,6 +434,8 @@ function displayGooglePlace(data) {
       psummary = data.result.editorial_summary.overview;
     }
   }
+  // more boolean results are defined in the Google Place API docs
+  // https://developers.google.com/maps/documentation/places/web-service/details
   if ("open_now" in data.result) {
     if (data.result.open_now) {
       pbadges += pbadgesdiv + "open now</div>";
@@ -420,7 +462,7 @@ function displayGooglePlace(data) {
     }
   }
   if ("serves_wine" in data.result) {
-    if (data.result.serves_beer) {
+    if (data.result.serves_wine) {
       pbadges += pbadgesdiv + "wine</div>";
     }
   }
@@ -487,7 +529,8 @@ var getGooglePlace = function (placeref) {
       if (response.ok) {
         // console.log(response);
         response.json().then(function (data) {
-          // console.log(data);
+          //console.log(data);
+          selectplace(data.result.place_id, data.result);
           displayGooglePlace(data);
         });
       } else {
@@ -529,6 +572,9 @@ var getGoogleSearch = function (search) {
   // Update our title to the search term
   document.getElementById("crawlertext").textContent = search;
 
+  // Display an image related to the search term
+  get_image(search);
+
   fetch(apiUrl, {
     method: "GET", // POST, PUT, DELETE, etc.
     headers: {
@@ -563,6 +609,64 @@ function displayselectedplaces() {
     menuitem.innerHTML = '<a data-placeid="' + selectedbarlist[i].place_id + '">' + selectedbarlist[i].name + "</a>";
     selectedplaces.appendChild(menuitem);
   }
+}
+
+// select the place_id
+function selectplace(place_id, result) {
+  if (markerlist[place_id]) {
+    markerlist[place_id].setIcon({ url: "./assets/images/blu-blank-32.png" });
+  }
+  var toggleElement = document.querySelector("#barcardcontainer input");
+  if (toggleElement) {
+    toggleElement.select();
+  }
+
+  let foundplaceid = isplaceselected(place_id);
+  // is this already in the selected places list?
+  if (foundplaceid < 0) {
+    // no, so let's add it and mark it on the map
+    selectedbarlist.push({
+      place_id: place_id,
+      name: result.name,
+      lat: result.geometry.location.lat,
+      lng: result.geometry.location.lng,
+    });
+    // refresh the selected places list
+    displayselectedplaces();
+  }
+}
+
+// highlight the marker of a place based on the card that is mouse-overed
+//   called from a mouseenter or touchenter event selector
+function highlightplace(event) {
+  event.preventDefault();
+  var place_id = event.target.querySelector("input").id;
+  if (isplaceselected(place_id) >= 0) {
+    markerlist[place_id].setIcon({ url: "./assets/images/blu-blank.png" });
+  } else {
+    markerlist[place_id].setIcon({ url: "./assets/images/wht-blank.png" });
+  }
+}
+
+// remove highlight from marker of a place when the mouse stops hovering over the card
+//   called from a mouseleave or touchleave event selector
+function unhighlightplace(event) {
+  event.preventDefault();
+  var place_id = event.target.querySelector("input").id;
+  if (isplaceselected(place_id) >= 0) {
+    markerlist[place_id].setIcon({ url: "./assets/images/blu-blank-32.png" });
+  } else {
+    markerlist[place_id].setIcon({ url: "./assets/images/mm_20_white.png" });
+  }
+}
+
+// find out if this place is selected already, returns index of selectedbarlist[] if true
+function isplaceselected(place_id) {
+  // is this bar on the selected places list?
+  let foundplaceid = selectedbarlist.findIndex(function (myobj) {
+    return myobj.place_id === place_id;
+  });
+  return foundplaceid;
 }
 
 // function to parse the data retrieved from the Google API
@@ -642,13 +746,16 @@ var displayGoogleBusinesses = function (data) {
     }
     barcardContainerEl.appendChild(newbarcard);
 
+    barcardContainerEl.lastChild.addEventListener("mouseenter", highlightplace);
+    barcardContainerEl.lastChild.addEventListener("touchenter", highlightplace);
+    barcardContainerEl.lastChild.addEventListener("mouseleave", unhighlightplace);
+    barcardContainerEl.lastChild.addEventListener("touchleave", unhighlightplace);
+
     // Add event listener to select bars from the displayed cards
     document.getElementById(data.results[i].place_id).addEventListener("change", function (event) {
       // console.log(event.target.id, event.target.checked);
       // is this bar on the selected places list?
-      let foundplaceid = selectedbarlist.findIndex(function (myobj) {
-        return myobj.place_id === event.target.id;
-      });
+      let foundplaceid = isplaceselected(event.target.id);
       // this card was just checked to selected
       if (event.target.checked) {
         // is this already in the selected places list?
