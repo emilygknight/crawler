@@ -11,11 +11,10 @@
     <title>Bar Crawler</title>
 </head>
 
-<body>
+<body id="mainscreen">
 
     <!-- Title Header -->
-    <header class="bg-gradient-to-r from-primary to-black m-1 rounded-lg w-[100%-5px]">
-        <!-- style="background-image: url(https://daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg);" -->
+    <header class="bg-gradient-to-r from-primary to-black mt-1 mx-1 rounded-lg w-[100%-5px]">
         <div class="hero-overlay rounded-lg"></div>
         <div class="text-center text-neutral-content p-5">
             <h1 class="mb-1 text-5xl font-bold capitalize"><span id="crawlertext" class="capitalize">Bar</span> Crawler
@@ -23,11 +22,27 @@
         </div>
     </header>
 
+    <!-- Modal replacement for alert(). Open the modal using ID.showModal() method -->
+    <dialog id="my_modal_1" class="modal">
+        <div class="modal-box">
+            <h3 class="font-bold text-lg pb-2">Alert</h3>
+            <p id="errormessage"></p>
+            <p id="errormessage2"></p>
+            <p class="py-2">Press ESC key or click the button below to close</p>
+            <div class="modal-action">
+                <form method="dialog">
+                    <!-- if there is a button in form, it will close the modal -->
+                    <button class="btn">Close</button>
+                </form>
+            </div>
+        </div>
+    </dialog>
+
     <!-- row -->
-    <main class="flex m-1 gap-1 max-md:flex-col gap-1">
+    <main class="flex mx-1 gap-1 max-md:flex-col gap-1">
 
         <!-- column 1 aside -->
-        <aside class="flex-col w-1/3 max-w-[50%] max-md:w-full max-md:max-w-full max-md:min-w-full">
+        <aside class="flex-col mt-1 w-1/3 max-w-[50%] max-md:w-full max-md:max-w-full max-md:min-w-full">
 
             <!-- weather forecast -->
             <section class="gap-1 mb-1 rounded-2xl text-black leading-6">
@@ -80,9 +95,6 @@
             <p id="status"></p>
             <a id="map-link" target="_blank"></a>
 
-<!--             <input id="searchTextField" type="text" placeholder="Search the map"
-                class="input input-bordered w-full input-primary mb-1">
- -->
             <!-- four styles of google maps, we will use the last one (javascript API) -->
             <!-- google maps without API
             <iframe
@@ -119,11 +131,12 @@
 
         </aside>
 
-        <!-- column 2 - results column-->
+        <!-- column 2 - spinner wheel and results column-->
         <div
             class="flex-col w-2/3 max-md:w-full max-md:max-w-full max-md:min-w-full md:max-h-[960px] md:overflow-scroll md:overscroll-y-contain">
 
             <div class="relative flex flex-col">
+
                 <!-- Selection result -->
                 <div class="flex flex-col justify-center">
                     <div class="drawercontent w-2/3 self-center">
@@ -135,7 +148,7 @@
                         class="drawerdown w-2/3 bg-gray-300 rounded-b-xl self-center text-center">🞃</button>
                 </div>
 
-                <!-- Wheel -->
+                <!-- Spinner Wheel -->
                 <div id="chart" class="min-w-full flex relative justify-center">
                 </div>
             </div>

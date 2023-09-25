@@ -57,3 +57,24 @@ text {
             transform:translate(0,-50%);
 }
 */
+
+/* Flip text animation, Álvaro
+   https://codepen.io/alvarotrigo/pen/bGrXmwM
+*/
+
+.waviy {
+  position: relative;
+}
+.waviy span {
+  position: relative;
+  display: inline-block;
+  font-size: 50px;
+  text-transform: uppercase;
+  animation: flip 1s infinite;
+  animation-delay: calc(.1s * var(--i))
+}
+@keyframes flip {
+  0%,90% {
+    transform: rotateY(360deg) 
+  }
+}
