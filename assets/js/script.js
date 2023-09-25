@@ -557,7 +557,7 @@ var getGoogleSearch = function (search) {
 function displayselectedplaces() {
   var selectedplaces = document.getElementById("selectedplaces");
   selectedplaces.replaceChildren(); // clear the list
-  console.log(selectedbarlist);
+  //console.log(selectedbarlist);
   for (var i = 0; i < selectedbarlist.length; i++) {
     var menuitem = document.createElement("li");
     menuitem.innerHTML = '<a data-placeid="' + selectedbarlist[i].place_id + '">' + selectedbarlist[i].name + "</a>";
