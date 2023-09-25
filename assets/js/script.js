@@ -198,11 +198,11 @@ function getweather() {
           // end parse openweathermap API response */
         });
       } else {
-        modalalert("Error: " + response.statusText, "getweather() fetching " + apilink);
+        modalalert("Error: " + response.statusText, " getweather() fetching " + apilink);
       }
     })
     .catch(function (error) {
-      console.log("Error:", error);
+      modalalert("Error:" + error);
     });
 
   function displayweather(weather) {
@@ -388,7 +388,7 @@ function displayGooglePlace(data) {
     <div class="flex justify-center px-4 py-16 bg-base-200">Hello!</div>
   </div>
   */
-  console.log(data);
+  // console.log(data);
   document.getElementById("bar-card").replaceChildren(); // clear out bar-card
 
   var pickedBarCard = document.createElement("div");
@@ -616,9 +616,12 @@ function selectplace(place_id, result) {
   if (markerlist[place_id]) {
     markerlist[place_id].setIcon({ url: "./assets/images/blu-blank-32.png" });
   }
-  var toggleElement = document.querySelector("#barcardcontainer input");
+  var toggleElement = document.getElementById(place_id);
+  console.log(toggleElement, toggleElement.checked);
   if (toggleElement) {
-    toggleElement.select();
+    if (!toggleElement.checked) {
+      toggleElement.click();
+    }
   }
 
   let foundplaceid = isplaceselected(place_id);
@@ -724,16 +727,16 @@ var displayGoogleBusinesses = function (data) {
     }
 
     // Add the new place into our place list (if it has no duplicate place_id)
-    let foundplaceid = barlist.find(function (myobj) {
+    var foundplaceid = barlist.find(function (myobj) {
       return myobj.place_id === barlist_item.place_id;
     });
     if (!foundplaceid) {
       barlist.push(barlist_item);
       // Add a new marker on the map for searched items and store the marker in a object (hash array)
       markerlist[data.results[i].place_id] = newmarkMap(data.results[i].place_id);
-      markerlist[data.results[i].place_id].addListener("click", (event) => {
+      /*       markerlist[data.results[i].place_id].addListener("click", (event) => {
         console.log(event);
-      });
+      }); */
     }
 
     if (i < Math.min(20, data.results.length)) {
@@ -746,6 +749,11 @@ var displayGoogleBusinesses = function (data) {
     }
     barcardContainerEl.appendChild(newbarcard);
 
+    var foundselectedplaceid = isplaceselected(data.results[i].place_id);
+    if (foundselectedplaceid >= 0) {
+      document.getElementById(data.results[i].place_id).click();
+    }
+
     barcardContainerEl.lastChild.addEventListener("mouseenter", highlightplace);
     barcardContainerEl.lastChild.addEventListener("touchenter", highlightplace);
     barcardContainerEl.lastChild.addEventListener("mouseleave", unhighlightplace);
@@ -755,11 +763,11 @@ var displayGoogleBusinesses = function (data) {
     document.getElementById(data.results[i].place_id).addEventListener("change", function (event) {
       // console.log(event.target.id, event.target.checked);
       // is this bar on the selected places list?
-      let foundplaceid = isplaceselected(event.target.id);
+      var foundselectedplaceid = isplaceselected(event.target.id);
       // this card was just checked to selected
       if (event.target.checked) {
         // is this already in the selected places list?
-        if (foundplaceid < 0) {
+        if (foundselectedplaceid < 0) {
           // no, so let's add it and mark it on the map
           selectedbarlist.push({
             place_id: event.target.id,
@@ -777,11 +785,13 @@ var displayGoogleBusinesses = function (data) {
         }
       } else {
         // user just unchecked this
-        if (foundplaceid >= 0) {
-          console.log(selectedbarlist[foundplaceid].name, selectedbarlist[foundplaceid].marker);
+        if (foundselectedplaceid >= 0) {
+          // console.log(selectedbarlist[foundselectedplaceid].name, selectedbarlist[foundselectedplaceid].marker);
           markerlist[event.target.id].setIcon({ url: "./assets/images/mm_20_white.png" });
-          selectedbarlist.splice(foundplaceid, 1);
+          selectedbarlist.splice(foundselectedplaceid, 1);
+          displayselectedplaces();
         } else {
+          modalalert("unselect error: place_id not found in selected places");
           console.log("unselect error: lost map marker to place_id ", event.target.id);
         }
       }
