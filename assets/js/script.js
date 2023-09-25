@@ -26,7 +26,6 @@
     (Consequently it is limited to 10000 iterations because the problem is n! complex and our computers has no power for large lists)
  */
 
-
 var storagekey = "barconfig"; // localStorage name to load/save config
 var barconfig = {
   latitude: 30.266666,
@@ -62,6 +61,14 @@ function configsave() {
   //console.log(this.pdata);
   localStorage.setItem(storagekey, JSON.stringify(barconfig));
   return true;
+}
+
+function modalalert(textmessage, sourcemessage) {
+  document.getElementById("errormessage").textContent = textmessage;
+  if (sourcemessage) {
+    document.getElementById("errormessage2").textContent = sourcemessage;
+  }
+  my_modal_1.showModal();
 }
 
 var barcardContainerEl = document.querySelector("#barcardcontainer");
@@ -191,7 +198,7 @@ function getweather() {
           // end parse openweathermap API response */
         });
       } else {
-        alert("Error: " + response.statusText);
+        modalalert("Error: " + response.statusText, "getweather() fetching " + apilink);
       }
     })
     .catch(function (error) {
@@ -484,11 +491,11 @@ var getGooglePlace = function (placeref) {
           displayGooglePlace(data);
         });
       } else {
-        alert("Error: " + response.statusText);
+        modalalert("Error: " + response.statusText, "getGooglePlace(" + placeref + ") calling" + apiUrl);
       }
     })
     .catch(function (error) {
-      alert("Unable to connect to Google");
+      modalalert("Unable to connect to Google", "getGooglePlace(" + placeref + ") calling" + apiUrl);
     });
 };
 
@@ -538,11 +545,11 @@ var getGoogleSearch = function (search) {
           displayGoogleBusinesses(data);
         });
       } else {
-        alert("Error: " + response.statusText);
+        modalalert("Error: " + response.statusText, "getGoogleSearch(" + search + ") calling" + apiUrl);
       }
     })
     .catch(function (error) {
-      alert("Unable to connect to Google");
+      modalalert("Unable to connect to Google", "getGoogleSearch(" + search + ") calling" + apiUrl);
     });
 };
 
@@ -620,6 +627,9 @@ var displayGoogleBusinesses = function (data) {
       barlist.push(barlist_item);
       // Add a new marker on the map for searched items and store the marker in a object (hash array)
       markerlist[data.results[i].place_id] = newmarkMap(data.results[i].place_id);
+      markerlist[data.results[i].place_id].addListener("click", (event) => {
+        console.log(event);
+      });
     }
 
     if (i < Math.min(20, data.results.length)) {
@@ -925,7 +935,7 @@ function newmarkMap(placeid) {
 //    https://github.com/muyangye/Traveling_Salesman_Solver_Google_Maps
 function createcrawl() {
   if (selectedbarlist.length < 2) {
-    alert("Please enter at least 2 choices to create a crawl");
+    modalalert("Please enter at least 2 choices to create a crawl");
   } else {
     localStorage.setItem("waypoints", JSON.stringify(selectedbarlist));
     window.location.href = "result.html";
@@ -959,11 +969,11 @@ var autocomplete = null;
 
 // initialize global variable autocomplete
 function initializeautocomplete() {
-  var input = document.getElementById('whattosearch');
+  var input = document.getElementById("whattosearch");
   autocomplete = new google.maps.places.Autocomplete(input);
 
   google.maps.event.clearInstanceListeners(autocomplete);
-  google.maps.event.addListener(autocomplete, 'place_changed', () => {
+  google.maps.event.addListener(autocomplete, "place_changed", () => {
     var place = autocomplete.getPlace();
     // center main map
     map.setCenter(place.geometry.location);
@@ -984,7 +994,6 @@ if (barconfig.latitude && barconfig.longitude) {
   // get weather on start screen
   getweather();
 }
-
 
 // if (barconfig.searchterm.length > 0) {
 //  getGoogleSearch(barconfig.searchterm);

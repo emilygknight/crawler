@@ -23,6 +23,22 @@
         </div>
     </header>
 
+    <!-- Modal replacement for alert(). Open the modal using ID.showModal() method -->
+    <dialog id="my_modal_1" class="modal">
+        <div class="modal-box">
+            <h3 class="font-bold text-lg">Hello!</h3>
+            <p id="errormessage"></p>
+            <p id="errormessage2"></p>
+            <p class="py-4">Press ESC key or click the button below to close</p>
+            <div class="modal-action">
+                <form method="dialog">
+                    <!-- if there is a button in form, it will close the modal -->
+                    <button class="btn">Close</button>
+                </form>
+            </div>
+        </div>
+    </dialog>
+
     <!-- row -->
     <main class="flex m-1 gap-1 max-md:flex-col gap-1">
 
@@ -80,7 +96,7 @@
             <p id="status"></p>
             <a id="map-link" target="_blank"></a>
 
-<!--             <input id="searchTextField" type="text" placeholder="Search the map"
+            <!--             <input id="searchTextField" type="text" placeholder="Search the map"
                 class="input input-bordered w-full input-primary mb-1">
  -->
             <!-- four styles of google maps, we will use the last one (javascript API) -->
